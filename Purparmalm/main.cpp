@@ -94,6 +94,7 @@ void dessiner(MinGL &window)
         }
     }
 
+    window.clearScreen();
     for (const Line& line : lineMap)
         window << line;
     window.finishFrame();
