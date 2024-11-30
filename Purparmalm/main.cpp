@@ -1,6 +1,7 @@
 #define FPS_LIMIT 60
 
 #include <iostream>
+#include <fstream>
 #include <thread>
 
 #include "mingl/mingl.h"
@@ -11,6 +12,11 @@
 #include "mingl/shape/triangle.h"
 
 using namespace std;
+using namespace nsShape;
+using namespace nsGraphics;
+
+typedef vector<unsigned> boardLine;
+typedef vector<boardLine> Matrix;
 
 struct pacman {
     nsShape::Circle body;
@@ -27,60 +33,75 @@ void setupPacman (pacman& pac) {
         nsGraphics::KSilver);
 }
 
-void dessiner(MinGL &window/*, nsShape::Circle& body, nsShape::Triangle& mouth*/)
-{
-    nsShape::Triangle triangle0(nsGraphics::Vec2D(100, 100), nsGraphics::Vec2D(150, 100), nsGraphics::Vec2D(125, 50), nsGraphics::KCyan);
-    nsShape::Triangle triangle1 = triangle0 + nsGraphics::Vec2D(60, 0);
+Line drawTop(const unsigned& tileSize, const unsigned& x, const unsigned& y) {
+    return Line (Vec2D(x*tileSize, y*tileSize), Vec2D(x*tileSize+tileSize, y*tileSize), KBlue, 20);
+}
+Line drawRight(const unsigned& tileSize, const unsigned& x, const unsigned& y) {
+    return Line (Vec2D(x*tileSize+tileSize, y*tileSize), Vec2D(x*tileSize+tileSize, y*tileSize+tileSize), KBlue, 20);
+}
+Line drawBottom(const unsigned& tileSize, const unsigned& x, const unsigned& y) {
+    return Line (Vec2D(x*tileSize, y*tileSize+tileSize), Vec2D(x*tileSize+tileSize, y*tileSize+tileSize), KBlue, 20);
+}
+Line drawLeft(const unsigned& tileSize, const unsigned& x, const unsigned& y) {
+    return Line (Vec2D(x*tileSize, y*tileSize), Vec2D(x*tileSize, y*tileSize+tileSize), KBlue, 20);
+}
 
-    window << triangle0 << triangle1;
 
-    nsShape::Circle cercle0(nsGraphics::Vec2D(100, 200), 50, nsGraphics::KRed);
-    nsShape::Circle cercle2 = cercle0 + nsGraphics::Vec2D(110, 0);
-    nsShape::Circle cercle3 = cercle2 + nsGraphics::Vec2D(110, 0);
-
-    window << cercle0 << cercle2 << cercle3;
-
-    pair<unsigned, unsigned> pos = {100, 400};
-    int mouthOpenness = 50;
-    nsShape::Circle body(nsGraphics::Vec2D(pos.first, pos.second), 25, nsGraphics::KYellow);  // pacman body
-    nsShape::Triangle mouth(
-        body.getPosition(),
-        body.getPosition() + nsGraphics::Vec2D(body.getRadius(), mouthOpenness),
-        body.getPosition() + nsGraphics::Vec2D(body.getRadius(), 0) - nsGraphics::Vec2D(0, mouthOpenness),
-        nsGraphics::KSilver);
-    nsShape::Circle eye(nsGraphics::Vec2D(pos.first - (body.getRadius() / 2), pos.second - (body.getRadius() / 2)), (body.getRadius() / 5), nsGraphics::KBlack);
-    bool closing = true;
-    while(true) {
-        this_thread::sleep_for(20ms);
-        window.clearScreen();
-        pos.first += 1;
-
-        // update pacman position
-        body.setPosition(nsGraphics::Vec2D(pos.first, pos.second));
-        mouth.setFirstPosition(body.getPosition());
-        mouth.setSecondPosition(body.getPosition() + nsGraphics::Vec2D(body.getRadius(), mouthOpenness));
-        mouth.setThirdPosition(body.getPosition() + nsGraphics::Vec2D(body.getRadius(), 0) - nsGraphics::Vec2D(0, mouthOpenness));
-        eye.setPosition(nsGraphics::Vec2D(pos.first - (body.getRadius() / 2), pos.second - (body.getRadius() / 2)));
-
-        // update mouth openness
-        if (closing) {
-            if (mouthOpenness <= 0)
-                closing = false;
-            else
-                mouthOpenness -= 5;
-        } else {
-            if (unsigned(mouthOpenness) >= body.getRadius())
-                closing = true;
-            else
-                mouthOpenness += 5;
+void generateMap(Matrix& gameBoard) {
+    ifstream mapFile("map.txt");
+    // WARNING: this assumes that the input file is formatted PERFECTLY. If it's not, boulette.
+    for (boardLine& line : gameBoard) {
+        for (unsigned& elem : line) {
+            mapFile >> elem;
         }
+    }
+    mapFile.close();
+}
 
-        window << body << mouth << eye;
-        window.finishFrame();
+void dessiner(MinGL &window)
+{
+    const unsigned tileSize = 64;  // must be diviser of 640
+    if (window.getWindowSize().getX() % tileSize != 0) {
+        cerr << "incorrect tileSize.";
+        exit (1);
+    }
+    unsigned tileCount = window.getWindowSize().getX() / tileSize;
+
+    Matrix gameBoard (tileCount, boardLine (tileCount));
+    generateMap(gameBoard);
+    vector<Line> lineMap;
+    for (size_t y = 0; y < gameBoard.size(); ++y) {
+        for (size_t x = 0; x < gameBoard[y].size(); ++x) {
+            switch (gameBoard[y][x]) {
+/*none*/        case 0: break;
+/*top*/         case 1: lineMap.push_back(drawTop(tileSize, x, y)); break;
+/*right*/       case 2: lineMap.push_back(drawRight(tileSize, x, y)); break;
+/*bottom*/      case 3: lineMap.push_back(drawBottom(tileSize, x, y)); break;
+/*left*/        case 4: lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*top-left*/    case 5: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*top-right*/   case 6: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawRight(tileSize, x, y)); break;
+/*bottom-right*/case 7: lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); break;
+/*bottom-left*/ case 8: lineMap.push_back(drawBottom(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*top-bottom*/  case 9: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); break;
+/*right-left*/  case 10: lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*encase top*/  case 11: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*encase right*/case 12: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); break;
+/*encaseBottom*/case 13: lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*encase left*/ case 14: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+/*square*/      case 15: lineMap.push_back(drawTop(tileSize, x, y)); lineMap.push_back(drawRight(tileSize, x, y)); lineMap.push_back(drawBottom(tileSize, x, y)); lineMap.push_back(drawLeft(tileSize, x, y)); break;
+                default: cout << "Something probably went wrong with map input. Ignoring...";
+            }
+        }
     }
 
+    for (const Line& line : lineMap)
+        window << line;
+    window.finishFrame();
 
-    window << body << mouth;
+    // while(true) {
+    //     // game mainloop
+    // }
+
 }
 
 int main()
