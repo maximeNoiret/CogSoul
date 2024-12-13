@@ -30,3 +30,22 @@ void loadMapFromFile(mapGrid& gameMap, const string& fileName) {
     }
     printGrid(gameMap);
 }
+
+// ToDo: add a map building process that uses a seed to procedurally generate a map out of rooms.
+
+int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y) {
+    if (roomGrid.size() + y > gameGrid.size()) return 2;
+    if (roomGrid[0].size() + x > gameGrid[0].size()) return 3;
+    // bool finishedBuilding = false;
+    mapGrid::iterator mapIter = gameGrid.begin() + y;
+
+    for (const mapLine& lin : roomGrid) {
+        mapLine::iterator mapLineIter = mapIter->begin() + x;
+        for (const char& car : lin) {
+            *mapLineIter = car;
+            ++mapLineIter;
+        }
+        ++mapIter;
+    }
+    return 0;
+}
