@@ -359,7 +359,7 @@ int ppal ()
             if (nombreTours%2 == 0)
             {
                 couleur(KJaune);
-                cout << "Tour du joueur 1" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'h' " << endl << "Pour horizontal : Entrez 'v' " << endl ;
+                cout << "Tour du joueur 1" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'v' " << endl << "Pour horizontal : Entrez 'h' " << endl ;
                 couleur(KReset);
                 read (STDIN_FILENO, &MoveHorV, 1);
                 showMatrix(Mat, Couleur);
@@ -379,7 +379,7 @@ int ppal ()
             else
             {
                 couleur(KVert);
-                cout << "Tour du joueur 2" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'h' " << endl << "Pour horizontal : Entrez 'v' " << endl ;
+                cout << "Tour du joueur 2" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'v' " << endl << "Pour horizontal : Entrez 'h' " << endl ;
                 couleur(KReset);
                 read (STDIN_FILENO, &MoveHorV, 1);
                 showMatrix(Mat, Couleur);
