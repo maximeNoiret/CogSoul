@@ -3,11 +3,10 @@
 #include <fstream>
 #include "types.h"
 #include "mapManagement.h"
-#include "terminalManagement.h"
 
 using namespace std;
 
-void loadMapFromFile(mapGrid& gameMap, const string& fileName) {
+void loadMapFromFile(mapGrid& roomGrid, const string& fileName) {
     ifstream mapFile (fileName);
     if (!mapFile.good()) {
         cerr << "Couldn't access map file!" << endl;
@@ -18,9 +17,9 @@ void loadMapFromFile(mapGrid& gameMap, const string& fileName) {
     size_t width;
     mapFile >> width;
     mapFile.get();  // gets rid of newline
-    gameMap.resize(height, mapLine (width, ' '));
+    roomGrid.assign(height, mapLine (width, ' '));
     string input;
-    for (mapGrid::iterator iter = gameMap.begin(); iter != gameMap.end() && getline(mapFile, input); ++iter) {
+    for (mapGrid::iterator iter = roomGrid.begin(); iter != roomGrid.end() && getline(mapFile, input); ++iter) {
         size_t tmpIndex = 0;
         for (mapLine::iterator subIter = iter->begin(); subIter != iter->end() && tmpIndex < input.size(); ++subIter) {
             if (input[tmpIndex] == '\n') continue;
@@ -28,7 +27,6 @@ void loadMapFromFile(mapGrid& gameMap, const string& fileName) {
             ++tmpIndex;
         }
     }
-    printGrid(gameMap);
 }
 
 // ToDo: add a map building process that uses a seed to procedurally generate a map out of rooms.
@@ -42,10 +40,17 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
     for (const mapLine& lin : roomGrid) {
         mapLine::iterator mapLineIter = mapIter->begin() + x;
         for (const char& car : lin) {
-            *mapLineIter = car;
+            if (*mapLineIter != '#') *mapLineIter = car;
             ++mapLineIter;
         }
         ++mapIter;
     }
     return 0;
+}
+
+
+int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y) {
+    mapGrid roomGrid;
+    loadMapFromFile(roomGrid, fileName);
+    return placeRoom(gameGrid, roomGrid, x, y);
 }

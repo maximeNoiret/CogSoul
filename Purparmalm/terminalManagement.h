@@ -11,8 +11,8 @@
 void printVect(const std::vector<char>& vect);
 
 /**
- * @brief Prints a mapGrid object. ToDo: generalize function (again lol)
- * @param[in] gameMap
+ * @brief Prints a mapGrid object. ToDo: generalize function
+ * @param[in] gameMap : a mapGrid object, usually the one that contains the entire map
  */
 void printGrid(const mapGrid& gameMap);
 
