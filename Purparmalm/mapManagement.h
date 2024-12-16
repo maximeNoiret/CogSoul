@@ -22,7 +22,7 @@ void loadMapFromFile(mapGrid& roomGrid, const std::string& fileName);
 int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y);
 
 /**
- * @brief calls loadMapFromFile and placeRoom. Merely a QOL function.
+ * @brief calls loadMapFromFile and placeRoom. Merely a QoL function.
  * @param[in out] gameGrid : a mapGrid object that has the entire map
  * @param[in] fileName : the path of the file that contains the map
  * @param[in] x : x position of upper left of the room in the map
