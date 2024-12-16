@@ -317,14 +317,14 @@ int ppal ()
     cin >> Couleur;
     cout << "Input des règles ici" << endl
          << "Quel mode de jeu voulez vous ?" << endl
-         << " Cavalier : entrez 'l' " << endl
-         << " Jeu normal : entrez 'a'" << endl << endl
+         << " Cavalier : entrez 'c' " << endl
+         << " Jeu normal : entrez 'n'" << endl << endl
          << "->  ";
     cin >>TypeDeJeu;
     initMat(Mat,ligne,colonne,posPlayer1,posPlayer2);
     showMatrix(Mat, Couleur);
     set_input_mode ();
-    if (TypeDeJeu == 'a')
+    if (TypeDeJeu == 'n')
 
         while (nombreTours < toursMax && posPlayer1 != posPlayer2)
         {
@@ -351,7 +351,7 @@ int ppal ()
             cout << endl << endl << "tours restants : " << toursMax-(nombreTours+1) << endl;
             nombreTours += 1;
         }
-    else if (TypeDeJeu == 'l')
+    else if (TypeDeJeu == 'c')
 
         while (nombreTours < toursMax && posPlayer1 != posPlayer2)
         {
