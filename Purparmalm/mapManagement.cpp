@@ -9,7 +9,7 @@ using namespace std;
 void loadMapFromFile(mapGrid& roomGrid, const string& fileName) {
     ifstream mapFile (fileName);
     if (!mapFile.good()) {
-        cerr << "Couldn't access map file!" << endl;
+        cerr << "Couldn't access map file! (" << fileName << ")" << endl;
         exit(2);
     }
     size_t height;

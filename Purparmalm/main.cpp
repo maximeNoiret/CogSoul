@@ -8,14 +8,10 @@ int main()
 {
     mapGrid gameMap (50, mapLine (80, ' '));
     mapGrid room;
-    loadMapFromFile(room, "../../rooms/pacMap.txt");
-    placeRoom(gameMap, room, 0, 0);
-    loadMapFromFile(room, "../../rooms/roomTest.txt");
-    placeRoom(gameMap, room, 27, 9);
-    loadMapFromFile(room, "../../rooms/weirdShapeTest.txt");
-    placeRoom(gameMap, room, 37, 9);
-    loadMapFromFile(room, "../../rooms/idkLmao.txt");
-    placeRoom(gameMap, room, 33, 19);
+    loadAndPlace(gameMap, "../../rooms/pacMap.txt", 0, 0);
+    loadAndPlace(gameMap, "../../rooms/roomTest.txt", 27, 9);
+    loadAndPlace(gameMap, "../../rooms/weirdShapeTest.txt", 37, 9);
+    loadAndPlace(gameMap, "../../rooms/idkLmao.txt", 33, 19);
     printGrid(gameMap);
     return 0;
 }
