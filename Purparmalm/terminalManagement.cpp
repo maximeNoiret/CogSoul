@@ -2,7 +2,9 @@
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <iomanip>
 #include "types.h"
+#include "mapManagement.h"
 
 using namespace std;
 struct termios saved_attributes;
@@ -43,6 +45,29 @@ void color (const unsigned & col) {
     cout << "\033[" << col <<"m";
 }
 
+string inputName() {
+    string playerName;
+    for (char input = 0;;) {
+        string nameDisplay (5, '_');
+        for (size_t i = 0; i < playerName.size(); ++i)
+            nameDisplay[i] = playerName[i];
+        clearScreen();
+        cout << '\t';
+        for (const char& letter : nameDisplay)
+            cout << letter << ' ';
+        cout << endl << "Enter your name:" << endl;
+        if (playerName.size() == 5) break;
+        read(STDIN_FILENO, &input, 1);
+        if (input == 10) break;
+        if (input == 127) {
+            playerName.erase(playerName.size()-1);
+        } else {
+            playerName += input;
+        }
+    }
+    return playerName;
+}
+
 
 void printVect(const vector<char>& vect) {
     for (const char & elem : vect) {
@@ -55,4 +80,26 @@ void printVect(const vector<char>& vect) {
 void printGrid(const mapGrid& gameMap) {
     for (const mapLine& lin : gameMap)
         printVect(lin);
+}
+
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player) {
+    mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
+    placeRoom(universe, gameMap, renderDist, renderDist);
+    CPosition upperLeft = {player.pos.first + renderDist * 0.5, player.pos.second};
+    CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5, player.pos.second + 2 * renderDist};
+    // print rendered map
+    for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
+         iter < universe.begin() + bottomRight.first;
+         ++iter) {
+        for (mapLine::const_iterator subIter = iter->begin() + upperLeft.second;
+             subIter < iter->begin() + bottomRight.second;
+             ++subIter) {
+            cout << *subIter;
+        }
+        cout << endl;
+    }
+
+    // print info
+    cout << endl << endl;
+    cout << "X: " << setw(4) << player.pos.first << "\tY: " << setw(4) << player.pos.second << "\tSteps: " << setw(4) << player.steps << endl;
 }

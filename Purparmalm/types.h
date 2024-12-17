@@ -2,6 +2,7 @@
 #define TYPES_H
 
 #include <vector>
+#include <string>
 
 /**
  * @brief a vector of characters, representing a line of the map.
@@ -14,6 +15,16 @@ typedef std::vector<char> mapLine;
 typedef std::vector<mapLine> mapGrid;
 
 typedef std::pair<unsigned, unsigned> CPosition;
+
+struct playerInfo {
+    std::string name;
+    CPosition pos;
+    unsigned steps;
+};
+
+struct enemyInfo {
+    CPosition pos;
+};
 
 const unsigned KReset   = 0;
 const unsigned KBlack   = 30;

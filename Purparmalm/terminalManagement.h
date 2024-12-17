@@ -13,11 +13,21 @@ void clearScreen();
 
 void color (const unsigned & col);
 
+std::string inputName();
+
 /**
  * @brief Prints a vector of characters. ToDo: generalize function
  * @param[in] vect
  */
 void printVect(const std::vector<char>& vect);
+
+/**
+ * @brief generateRender
+ * @param[in] gameMap : mapGrid object containing the entire map
+ * @param[in] renderDist : unsigned defining render distance
+ * @param[in] playerPos : position of the player
+ */
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player);
 
 /**
  * @brief Prints a mapGrid object. ToDo: generalize function

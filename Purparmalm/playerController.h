@@ -7,11 +7,11 @@
  * @brief moveToken
  * @param[in out] Mat : mapGrid object containing the entire map
  * @param[in] move : character representing entity's move
- * @param[in out] pos : position of the entity
+ * @param[in out] player : playerInfo object with info about the player
  */
-void moveToken (mapGrid & Mat, const char& move, CPosition & pos);
+void moveToken (mapGrid & Mat, const char& move, playerInfo& player);
 
-void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const CPosition& playerPos);
+
 
 
 #endif // PLAYERCONTROLLER_H
