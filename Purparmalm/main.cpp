@@ -15,13 +15,14 @@ int main()
     loadAndPlace(gameMap, "../../rooms/idkLmao.txt", 33, 19);
     printGrid(gameMap);
     // ToDo: include player controller with termios
+    // ToDo: clean that shit up in various functions in other source files
+    //     (like terminalManagement.cpp or maybe playerController.cpp)
     set_input_mode();
     bool playerDead = false;
     bool playerWon = false;
     string playerName;
     // dumb af code :)
     char input = 0;
-    short len = 0;
     for (;;) {
         string nameDisplay (5, '_');
         for (size_t i = 0; i < playerName.size(); ++i)
@@ -31,15 +32,13 @@ int main()
         for (const char& letter : nameDisplay)
             cout << letter << ' ';
         cout << endl << "Enter your name:" << endl;
-        if (len == 5) break;
+        if (playerName.size() == 5) break;
         read(STDIN_FILENO, &input, 1);
         if (input == 10) break;
         if (input == 127) {
             playerName.erase(playerName.size()-1);
-            --len;
         } else {
             playerName += input;
-            ++len;
         }
     }
     // for (char input; !playerDead && !playerWon;) {
