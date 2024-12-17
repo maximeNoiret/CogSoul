@@ -17,13 +17,13 @@ void loadMapFromFile(mapGrid& roomGrid, const string& fileName) {
     size_t width;
     mapFile >> width;
     mapFile.get();  // gets rid of newline
-    roomGrid.assign(height, mapLine (width, ' '));
+    roomGrid.assign(height, mapLine (width, KEmpty));
     string input;
     for (mapGrid::iterator iter = roomGrid.begin(); iter != roomGrid.end() && getline(mapFile, input); ++iter) {
         size_t tmpIndex = 0;
         for (mapLine::iterator subIter = iter->begin(); subIter != iter->end() && tmpIndex < input.size(); ++subIter) {
             if (input[tmpIndex] == '\n') continue;
-            *subIter = input[tmpIndex];
+            *subIter = (input[tmpIndex] == ' ' ? KEmpty : input[tmpIndex]);
             ++tmpIndex;
         }
     }

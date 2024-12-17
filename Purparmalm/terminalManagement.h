@@ -4,6 +4,15 @@
 #include <vector>
 #include "types.h"
 
+
+void reset_input_mode();
+void set_input_mode();
+
+
+void clearScreen();
+
+void color (const unsigned & col);
+
 /**
  * @brief Prints a vector of characters. ToDo: generalize function
  * @param[in] vect
