@@ -41,6 +41,8 @@ int main()
             playerName += input;
         }
     }
+
+    // main gameLoop
     // for (char input; !playerDead && !playerWon;) {
 
     // }
