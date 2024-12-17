@@ -13,6 +13,8 @@ typedef std::vector<char> mapLine;
  */
 typedef std::vector<mapLine> mapGrid;
 
+typedef std::pair<unsigned, unsigned> CPosition;
+
 const unsigned KReset   = 0;
 const unsigned KBlack   = 30;
 const unsigned KRed     = 31;

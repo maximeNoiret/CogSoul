@@ -6,11 +6,11 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
         mapManagement.cpp \
+        playerController.cpp \
         terminalManagement.cpp
-
-INCLUDEPATH += /usr/include/c++/11/
 
 HEADERS += \
     mapManagement.h \
+    playerController.h \
     terminalManagement.h \
     types.h
