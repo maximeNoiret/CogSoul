@@ -86,7 +86,7 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
     mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
     placeRoom(universe, gameMap, renderDist, renderDist);
     CPosition upperLeft = {player.pos.first + renderDist * 0.5, player.pos.second};
-    CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5, player.pos.second + 2 * renderDist};
+    CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5 + 1, player.pos.second + 2 * renderDist + 1};
     // print rendered map
     for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
          iter < universe.begin() + bottomRight.first;
@@ -101,5 +101,9 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
 
     // print info
     cout << endl << endl;
-    cout << "X: " << setw(4) << player.pos.first << "\tY: " << setw(4) << player.pos.second << "\tSteps: " << setw(4) << player.steps << endl;
+    cout << "X: " << setw(4) << player.pos.first
+         << "\tY: " << setw(4) << player.pos.second
+         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No")
+         << "\tSteps: " << setw(4) << player.steps
+         << endl;
 }

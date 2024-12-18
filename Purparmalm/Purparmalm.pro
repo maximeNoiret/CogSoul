@@ -4,13 +4,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        entityController.cpp \
         main.cpp \
         mapManagement.cpp \
-        playerController.cpp \
         terminalManagement.cpp
 
 HEADERS += \
+    entityController.h \
     mapManagement.h \
-    playerController.h \
     terminalManagement.h \
     types.h

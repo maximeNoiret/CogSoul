@@ -1,6 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <array>
 #include <vector>
 #include <string>
 
@@ -19,12 +20,17 @@ typedef std::pair<unsigned, unsigned> CPosition;
 struct playerInfo {
     std::string name;
     CPosition pos;
-    unsigned steps;
+    bool seen = false;
+    bool dead = false;
+    unsigned steps = 0;
 };
 
 struct enemyInfo {
     CPosition pos;
+    bool sees = false;
 };
+
+const std::array<char, 4> possibleMoves = {'z', 'q', 's', 'd'};
 
 const unsigned KReset   = 0;
 const unsigned KBlack   = 30;
