@@ -90,10 +90,14 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
     CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5 + 1, player.pos.second + 2 * renderDist + 1};
 
     // print rendered map
+    // test if weird box characters work in any systems (test it in a fresh linux distro)
+    cout << '\t' << "╔";
+    for(unsigned i = 0; i < renderDist*2+1; ++i) cout << "═";
+    cout << "╗" << endl;
     for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
          iter < universe.begin() + bottomRight.first;
          ++iter) {
-        cout << '\t';
+        cout << '\t' << "║";
         for (mapLine::const_iterator subIter = iter->begin() + upperLeft.second;
              subIter < iter->begin() + bottomRight.second;
              ++subIter) {
@@ -103,8 +107,11 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
             cout << (*subIter == '1' || *subIter == '3' ? '-' :
                      *subIter == '2' || *subIter == '4' ? '|' : *subIter);
         }
-        cout << endl;
+        cout << "║" << endl;
     }
+    cout << '\t' << "╚";
+    for(unsigned i = 0; i < renderDist*2+1; ++i) cout << "═";
+    cout << "╝" << endl;
     // print info
     cout << endl << endl;
     cout << "X: " << setw(4) << player.pos.second
