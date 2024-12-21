@@ -30,7 +30,12 @@ struct enemyInfo {
     bool sees = false;
 };
 
+// using arrays to save on ressources (I think lmao)
 const std::array<char, 4> possibleMoves = {'z', 'q', 's', 'd'};
+const std::array<std::string, 3> roomsUp = {"testRoomUp.txt", "anotherRoom.txt", "roomTest.txt"};
+const std::array<std::string, 1> roomsRight = {"roomTest.txt"};
+const std::array<std::string, 0> roomsDown = {};
+const std::array<std::string, 2> roomsLeft = {"anotherRoom.txt", "roomTest.txt"};
 
 const unsigned KReset   = 0;
 const unsigned KBlack   = 30;
@@ -45,6 +50,7 @@ const char     KEmpty        = '_';
 const char     KTokenPlayer1 = '@';
 const unsigned KColorPlayer1 = KBlue;
 const char     KTokenEnemy   = 'O';
+const char     KColorEnemy   = KRed;
 
 
 

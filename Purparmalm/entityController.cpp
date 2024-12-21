@@ -1,9 +1,7 @@
 #include "types.h"
 #include "entityController.h"
-#include "terminalManagement.h"
 #include "mapManagement.h"
 #include <cctype>
-#include <iostream>
 
 using namespace std;
 
@@ -41,22 +39,32 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos) {
         }
         break;
     }
+    // if player moves on a door
+    if (Mat[pos.first][pos.second] == '1' ||
+        Mat[pos.first][pos.second] == '2' ||
+        Mat[pos.first][pos.second] == '3' ||
+        Mat[pos.first][pos.second] == '4')
+        generateRoom(Mat, Mat[pos.first][pos.second], pos);
     Mat[pos.first][pos.second] = currPlayer;
 }
 
 // I FUCKING hate this :) PLEASE FIND A WAY TO OPTIMIZE IT I HATE IT I HATE IT I HATE IT
+// Considering letting enemies go diagonally, making the game MUCH harder when caught (good) and making this PIECE OF SHIT code better (good)
+//     Will contact team about it and ask their opinion on it.
 void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemies) {
     for (enemyInfo& enemy : enemies) {
         char move;
         if (enemy.sees) {
             if (enemy.pos.first < player.pos.first) {
                 if (enemy.pos.second < player.pos.second) {
-                    if (player.pos.first - enemy.pos.first < player.pos.second - enemy.pos.second)
+                    if (player.pos.first - enemy.pos.first < player.pos.second - enemy.pos.second &&
+                        gameMap[enemy.pos.first][enemy.pos.second + 1] != '#')
                         move = 'd';
                     else
                         move = 's';
                 } else if (enemy.pos.second > player.pos.second) {
-                    if (player.pos.first - enemy.pos.first < enemy.pos.second - player.pos.second)
+                    if (player.pos.first - enemy.pos.first < enemy.pos.second - player.pos.second &&
+                        gameMap[enemy.pos.first][enemy.pos.second - 1] != '#')
                         move= 'q';
                     else
                         move = 's';
@@ -64,12 +72,14 @@ void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemie
                     move = 's';
             } else if (enemy.pos.first > player.pos.first) {
                 if (enemy.pos.second < player.pos.second) {
-                    if (enemy.pos.first - player.pos.first < player.pos.second - enemy.pos.second)
+                    if (enemy.pos.first - player.pos.first < player.pos.second - enemy.pos.second &&
+                        gameMap[enemy.pos.first][enemy.pos.second + 1] != '#')
                         move = 'd';
                     else
                         move = 'z';
                 } else if (enemy.pos.second > player.pos.second) {
-                    if (enemy.pos.first - player.pos.first < enemy.pos.second - player.pos.second)
+                    if (enemy.pos.first - player.pos.first < enemy.pos.second - player.pos.second &&
+                        gameMap[enemy.pos.first][enemy.pos.second - 1] != '#')
                         move= 'q';
                     else
                         move = 'z';

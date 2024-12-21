@@ -6,10 +6,10 @@
 
 /**
  * @brief Places a map from a text file into a mapGrid object
- * @param[in out] roomGrid : a mapGrid object that will store the map from the file
  * @param[in] fileName : the path of the file that contains the map
+ * @return a mapGrid object containing the map
  */
-void loadMapFromFile(mapGrid& roomGrid, const std::string& fileName);
+mapGrid loadMapFromFile(const std::string& fileName);
 
 /**
  * @brief Places a room in the map at coordinates x y
@@ -30,5 +30,7 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
  * @return same as placeRoom: 0 if everything went alright, 2 if room is too tall (y), 3 if room is too large(x)
  */
 int loadAndPlace(mapGrid& gameGrid, const std::string& fileName, const size_t& x, const size_t y);
+
+void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos);
 
 #endif // MAPMANAGEMENT_H

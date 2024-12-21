@@ -11,15 +11,16 @@ int main()
 {
     srand(time(NULL));
     mapGrid gameMap (50, mapLine (80, KEmpty));
-    loadAndPlace(gameMap, "../../rooms/roomTest.txt", 27, 9);
-    loadAndPlace(gameMap, "../../rooms/weirdShapeTest.txt", 37, 9);
-    loadAndPlace(gameMap, "../../rooms/idkLmao.txt", 33, 19);
+    // loadAndPlace(gameMap, "../../rooms/roomTest.txt", 27, 9);
+    // loadAndPlace(gameMap, "../../rooms/weirdShapeTest.txt", 37, 9);
+    // loadAndPlace(gameMap, "../../rooms/idkLmao.txt", 33, 19);
+    loadAndPlace(gameMap, "../../rooms/testProceduralDoors.txt", 35, 20);
 
     set_input_mode();
 
     bool playerWon = false;
 
-    playerInfo player = {inputName(), CPosition (11, 29), false, false, 0};
+    playerInfo player = {inputName(), CPosition (25, 40), false, false, 0};
     vector<enemyInfo> enemies (3);
     enemies[0] = {CPosition (14, 30), false};
     enemies[1] = {CPosition (14, 31), false};
@@ -36,8 +37,6 @@ int main()
         moveToken(gameMap, input, player.pos);
         moveEnemies(gameMap, player, enemies);
         player.seen = isPlayerSeen(gameMap, enemies, player);
-
-
     }
     if (player.dead) {
         clearScreen();

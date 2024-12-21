@@ -85,24 +85,30 @@ void printGrid(const mapGrid& gameMap) {
 void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player) {
     mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
     placeRoom(universe, gameMap, renderDist, renderDist);
+    // simple waste of ressources (16 bytes of memory(?)) to make my life easier
     CPosition upperLeft = {player.pos.first + renderDist * 0.5, player.pos.second};
     CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5 + 1, player.pos.second + 2 * renderDist + 1};
+
     // print rendered map
     for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
          iter < universe.begin() + bottomRight.first;
          ++iter) {
+        cout << '\t';
         for (mapLine::const_iterator subIter = iter->begin() + upperLeft.second;
              subIter < iter->begin() + bottomRight.second;
              ++subIter) {
-            cout << *subIter;
+            // nested ternary operators my beloved :)
+            color(*subIter == KTokenPlayer1 ? KColorPlayer1 :
+                  *subIter == KTokenEnemy ? KColorEnemy : KReset);
+            cout << (*subIter == '1' || *subIter == '3' ? '-' :
+                     *subIter == '2' || *subIter == '4' ? '|' : *subIter);
         }
         cout << endl;
     }
-
     // print info
     cout << endl << endl;
-    cout << "X: " << setw(4) << player.pos.first
-         << "\tY: " << setw(4) << player.pos.second
+    cout << "X: " << setw(4) << player.pos.second
+         << "\tY: " << setw(4) << player.pos.first
          << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No")
          << "\tSteps: " << setw(4) << player.steps
          << endl;
