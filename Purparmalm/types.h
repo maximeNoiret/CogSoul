@@ -23,23 +23,17 @@ struct playerInfo {
     CPosition pos;
     bool seen = false;
     bool dead = false;
-    unsigned steps = 0;
 };
+
 
 struct enemyInfo {
     CPosition pos;
     bool sees = false;
 };
 
-// const unsigned KReset   = 0;
-// const unsigned KBlack   = 30;
-// const unsigned KRed     = 31;
-// const unsigned KGreen   = 32;
-// const unsigned KYellow  = 33;
-// const unsigned KBlue    = 34;
-// const unsigned KMagenta = 35;
-// const unsigned KCyan    = 36;
-
+/**
+ * @brief map containing each color and their terminal value equivalent
+ */
 const std::map<std::string, unsigned> Colors = {
     {"Reset", 0},
     {"Black", 30},
@@ -52,11 +46,11 @@ const std::map<std::string, unsigned> Colors = {
 };
 
 struct settings {
-    char        KEmpty        = '_';
-    char        KTokenPlayer1 = '@';
-    std::string KColorPlayer1 = "Cyan";
-    char        KTokenEnemy   = 'O';
     std::string KColorEnemy   = "Red";
+    std::string KColorPlayer1 = "Cyan";
+    char        KEmpty        = '_';
+    char        KTokenEnemy   = 'O';
+    char        KTokenPlayer1 = '@';
 };
 
 // using arrays to save on ressources (I think lmao)

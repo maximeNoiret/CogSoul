@@ -46,10 +46,10 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
         Mat[pos.first][pos.second] == '4')
         generateRoom(Mat, Mat[pos.first][pos.second], pos, config);
     Mat[pos.first][pos.second] = currPlayer;
-}
+} // moveToken
 
 // I FUCKING hate this :) PLEASE FIND A WAY TO OPTIMIZE IT I HATE IT I HATE IT I HATE IT
-// Considering letting enemies go diagonally, making the game MUCH harder when caught (good) and making this PIECE OF SHIT code better (good)
+// Considering letting enemies go diagonally, making the game MUCH harder when seen (good) and making this PIECE OF SHIT code better (good)
 //     Will contact team about it and ask their opinion on it.
 void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemies, const settings& config) {
     for (enemyInfo& enemy : enemies) {
@@ -87,13 +87,12 @@ void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemie
                     move = 'z';
             } else if (enemy.pos.second < player.pos.second) move = 'd';
             else if (enemy.pos.second > player.pos.second) move = 'q';
-        }else
-            move = possibleMoves[rand() % 5];
+        }else move = possibleMoves[rand() % 5];
         moveToken(gameMap, move, enemy.pos, config);
         if (player.pos == enemy.pos)
             player.dead = true;
     }
-}
+} // moveEnemies
 
 bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& pos2) {
     CPosition currentPoint = pos1;
@@ -107,7 +106,7 @@ bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& p
         if (Mat[currentPoint.first][currentPoint.second] == '#') isWall = true;
     }
     return isWall;
-}
+} // isWallBetween
 
 bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerInfo& player, const settings& config) {
     unsigned radius = 2;
@@ -133,6 +132,6 @@ bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerIn
         if (!found) enemyIter->sees = false;
     }
     return found;
-}
+} // isPlayerSeen
 
 

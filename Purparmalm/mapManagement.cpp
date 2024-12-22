@@ -3,7 +3,6 @@
 #include <fstream>
 #include "types.h"
 #include "mapManagement.h"
-#include "entityController.h"
 
 using namespace std;
 
@@ -33,6 +32,7 @@ mapGrid loadMapFromFile(const string& fileName, const settings& config) {
     return roomGrid;
 }
 
+// FUCKING DONE EZ
 /* ToDo: add a map building process that uses a seed to procedurally generate a map out of rooms.
  *          -Each room has one or more doors with a certain direction
  *          -When player steps on a door, it generates a room in that direction
@@ -75,19 +75,13 @@ bool isInVect(const vector<T>& vect, const T elem) {
 
 
 void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config) {
-    // Do:
-    // Select a random room for the desired direction
-    // Calculate position of room in gameGrid
-    // Check if room fits
-    // While the room doesn't fit
-
     // Select a random room for the desired direction
     vector<string> blacklistedMaps;
     char desiredDirection;
     bool cannotPlace = false;
     // attempt to place room until able to (or not)
     for(;;) {
-        string fileName = "../../rooms/";
+        string fileName = "rooms/";
         switch (desiredDoor) {
             case '1':
                 if (blacklistedMaps.size() == roomsUp.size()){
@@ -133,7 +127,6 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
             cerr << "Couldn't access map file! (" << fileName << ")" << endl;
             exit(2);
         }
-
         for (; tmpFile.get() != desiredDirection && tmpFile.peek() != tmpFile.eof(););  // get to desired door metadata
         size_t y;
         tmpFile >> y;  // get door y position relative to room origin
@@ -143,6 +136,7 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
         if (loadAndPlace(gameGrid, fileName, roomOrigin.second, roomOrigin.first, config) == 0) break;
         blacklistedMaps.push_back(fileName);  // avoid trying again to place down a map that didn't work once
     }
+    // if couldn't place a room, place a wall instead lmao get rekt nob
     if (cannotPlace) {
         // BIG potential for edge cases overflows lmao (get it? edge case? nvm)
         switch (desiredDoor) {
@@ -169,8 +163,6 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
                 break;
         };
     }
-
-
 }
 
 

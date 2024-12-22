@@ -111,19 +111,6 @@ string inputName() {
 }
 
 
-// void printVect(const vector<char>& vect) {
-//     for (const char & elem : vect) {
-//         color((elem == KTokenPlayer1 ? KBlue : (elem == KTokenEnemy ? KRed : KReset)));
-//         cout << elem;
-//     }
-//     cout << endl;
-// }
-
-// void printGrid(const mapGrid& gameMap) {
-//     for (const mapLine& lin : gameMap)
-//         printVect(lin);
-// }
-
 void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config) {
     mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
     placeRoom(universe, gameMap, renderDist, renderDist);

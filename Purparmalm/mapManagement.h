@@ -7,6 +7,7 @@
 /**
  * @brief Places a map from a text file into a mapGrid object
  * @param[in] fileName : the path of the file that contains the map
+ * @param[in] config : settings of the game
  * @return a mapGrid object containing the map
  */
 mapGrid loadMapFromFile(const std::string& fileName, const settings& config);
@@ -31,6 +32,13 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
  */
 int loadAndPlace(mapGrid& gameGrid, const std::string& fileName, const size_t& x, const size_t y, const settings& config);
 
+/**
+ * @brief generates a random room for a desired direction at a specific location
+ * @param[in out] gameGrid : a mapGrid object that has the entire map
+ * @param[in] desiredDoor : a number that indicates which direction is desired
+ * @param[in] pos : position of the door that generates the room
+ * @param[in] config : settings of the game
+ */
 void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config);
 
 #endif // MAPMANAGEMENT_H

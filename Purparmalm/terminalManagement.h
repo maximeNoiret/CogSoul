@@ -1,7 +1,6 @@
 #ifndef TERMINALMANAGEMENT_H
 #define TERMINALMANAGEMENT_H
 
-#include <vector>
 #include "types.h"
 
 
@@ -18,15 +17,18 @@ void centerOut(const std::string& out);
 
 void renderMainMenu();
 
-unsigned short mainMenu();
-
-std::string inputName();
 
 /**
- * @brief Prints a vector of characters. ToDo: generalize function
- * @param[in] vect
+ * @brief displays an interactive Main Menu with options to play or go into settings
+ * @return the selected option (New Game, Settings, Exit)
  */
-void printVect(const std::vector<char>& vect);
+unsigned short mainMenu();
+
+/**
+ * @brief Lets the user input their name in an interactive way
+ * @return the name from the user
+ */
+std::string inputName();
 
 /**
  * @brief generateRender
@@ -34,12 +36,13 @@ void printVect(const std::vector<char>& vect);
  * @param[in] renderDist : unsigned defining render distance
  * @param[in] playerPos : position of the player
  */
-void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config);
-
 /**
- * @brief Prints a mapGrid object. ToDo: generalize function
- * @param[in] gameMap : a mapGrid object, usually the one that contains the entire map
+ * @brief Generates a render containing the viewport of the game as well as information under it
+ * @param[in] gameMap : mapGrid object containing the entire map
+ * @param[in] renderDist : render distance (not changeable by user and is 10 by default)
+ * @param[in] player : playerInfo object with information about the player (pos)
+ * @param[in] config : settings of the game
  */
-void printGrid(const mapGrid& gameMap);
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config);
 
 #endif // TERMINALMANAGEMENT_H

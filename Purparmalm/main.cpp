@@ -12,7 +12,7 @@ int mainGame(const settings& config)
 {
     srand(time(NULL));
     mapGrid gameMap (50, mapLine (80, config.KEmpty));
-    loadAndPlace(gameMap, "../../rooms/testProceduralDoors.txt", 35, 20, config);
+    loadAndPlace(gameMap, "rooms/testProceduralDoors.txt", 35, 20, config);
 
     set_input_mode();
 
@@ -46,8 +46,9 @@ int mainGame(const settings& config)
 
 
 int main() {
-    set_input_mode();
     settings config;
+    initSettings(config);
+    set_input_mode();
     for(unsigned short select = 0;select < 2;) {
         select = mainMenu();
         switch(select) {

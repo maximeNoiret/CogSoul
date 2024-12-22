@@ -2,11 +2,51 @@
 #include "types.h"
 #include "terminalManagement.h"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <unistd.h>
 
 using namespace std;
 
+
+void trim(string& input) {
+    for (string::iterator iter = input.begin(); iter < input.end();)
+        if (isspace(*iter)) input.erase(iter);
+        else ++iter;
+}
+
+void initSettings(settings& config) {
+    ifstream configFile;
+    configFile.open("config.yaml");
+    if (!configFile.good()) {
+        ofstream newConfigFile("config.yaml");
+        newConfigFile << "KColorEnemy   : " << config.KColorEnemy << '\n'
+                      << "KColorPlayer1 : " << config.KColorPlayer1 << '\n'
+                      << "KEmpty        : " << config.KEmpty << '\n'
+                      << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
+                      << "KTokenPlayer1 : " << config.KTokenPlayer1;
+        newConfigFile.close();
+        configFile.close();
+        configFile.open("config.yaml");
+    }
+    map<string, string> configValues;
+    for(string input;getline(configFile, input);) {
+        cout << '\'' << input << '\'' << '\t';
+        trim(input);
+        cout << '\'' << input << '\'' << endl;
+        size_t semiColon = input.find(":");
+        configValues[input.substr(0, semiColon)] = input.substr(semiColon+1);
+    }
+    configFile.close();
+    // this is ridiculous...
+    config.KColorEnemy = configValues.find("KColorEnemy")->second;
+    config.KColorPlayer1 = configValues.find("KColorPlayer1")->second;
+    config.KEmpty = configValues.find("KEmpty")->second[0];
+    config.KTokenEnemy = configValues.find("KTokenEnemy")->second[0];
+    config.KTokenPlayer1 = configValues.find("KTokenPlayer1")->second[0];
+}
+
+// uh... wtf is this? Monster Energy makes me black out and write code like this????
 void renderSettingsMenu(const unsigned short& select, const settings& config){
     clearScreen();
     centerOut("Settings");
@@ -33,12 +73,11 @@ void renderSettingsMenu(const unsigned short& select, const settings& config){
     cout << '\n' << '\n';
     color((select == 4 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
+    color(Colors.find("Reset")->second);
 }
 
-unsigned short settingsMenu(settings& config) {
-    unsigned short select = 0;
-
-    for (;select < 4;) {
+void settingsMenu(settings& config) {
+    for (unsigned short select = 0;select < 4;) {
         for(char input = 0;input != 10;) {
             renderSettingsMenu(select, config);
             read(STDIN_FILENO, &input, 1);
@@ -76,5 +115,12 @@ unsigned short settingsMenu(settings& config) {
         }
     }
     color(Colors.find("Reset")->second);
-    return select;
+    // If we left the loop, that means the user selected exit. In that case, we save the settings to the config file
+    ofstream configFile("config.yaml");
+    configFile << "KColorEnemy   : " << config.KColorEnemy << '\n'
+               << "KColorPlayer1 : " << config.KColorPlayer1 << '\n'
+               << "KEmpty        : " << config.KEmpty << '\n'
+               << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
+               << "KTokenPlayer1 : " << config.KTokenPlayer1;
+    configFile.close();
 }
