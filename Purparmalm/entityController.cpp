@@ -6,35 +6,35 @@
 using namespace std;
 
 
-void moveToken (mapGrid & Mat, const char& move, CPosition& pos) {
+void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config) {
     char currPlayer = Mat[pos.first][pos.second];
-    Mat[pos.first][pos.second] = KEmpty;
+    Mat[pos.first][pos.second] = config.KEmpty;
     switch (tolower(move)) {
     case 'z':
         if (pos.first > 0 &&
             Mat[pos.first - 1][pos.second] != '#' &&
-            Mat[pos.first - 1][pos.second] != KTokenEnemy) {
+            Mat[pos.first - 1][pos.second] != config.KTokenEnemy) {
             --pos.first;
         }
         break;
     case 'q':
         if (pos.second > 0 &&
             Mat[pos.first][pos.second - 1] != '#' &&
-            Mat[pos.first][pos.second - 1] != KTokenEnemy) {
+            Mat[pos.first][pos.second - 1] != config.KTokenEnemy) {
             --pos.second;
         }
         break;
     case 's':
         if (pos.first < Mat.size()-1 &&
             Mat[pos.first + 1][pos.second] != '#' &&
-            Mat[pos.first + 1][pos.second] != KTokenEnemy) {
+            Mat[pos.first + 1][pos.second] != config.KTokenEnemy) {
             ++pos.first;
         }
         break;
     case 'd':
         if (pos.second < Mat[pos.first].size()-1 &&
             Mat[pos.first][pos.second + 1] != '#' &&
-            Mat[pos.first][pos.second + 1] != KTokenEnemy) {
+            Mat[pos.first][pos.second + 1] != config.KTokenEnemy) {
             ++pos.second;
         }
         break;
@@ -44,14 +44,14 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos) {
         Mat[pos.first][pos.second] == '2' ||
         Mat[pos.first][pos.second] == '3' ||
         Mat[pos.first][pos.second] == '4')
-        generateRoom(Mat, Mat[pos.first][pos.second], pos);
+        generateRoom(Mat, Mat[pos.first][pos.second], pos, config);
     Mat[pos.first][pos.second] = currPlayer;
 }
 
 // I FUCKING hate this :) PLEASE FIND A WAY TO OPTIMIZE IT I HATE IT I HATE IT I HATE IT
 // Considering letting enemies go diagonally, making the game MUCH harder when caught (good) and making this PIECE OF SHIT code better (good)
 //     Will contact team about it and ask their opinion on it.
-void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemies) {
+void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemies, const settings& config) {
     for (enemyInfo& enemy : enemies) {
         char move;
         if (enemy.sees) {
@@ -89,7 +89,7 @@ void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemie
             else if (enemy.pos.second > player.pos.second) move = 'q';
         }else
             move = possibleMoves[rand() % 5];
-        moveToken(gameMap, move, enemy.pos);
+        moveToken(gameMap, move, enemy.pos, config);
         if (player.pos == enemy.pos)
             player.dead = true;
     }
@@ -109,7 +109,7 @@ bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& p
     return isWall;
 }
 
-bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerInfo& player) {
+bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerInfo& player, const settings& config) {
     unsigned radius = 2;
     mapGrid universe (Mat.size()+ 2 * radius, mapLine (Mat[0].size()+ 2 * radius, ' '));
     placeRoom(universe, Mat, radius, radius);
@@ -124,7 +124,7 @@ bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerIn
             for (mapLine::const_iterator subIter = iter->begin() + upperLeft.second;
                  subIter < iter->begin() + bottomRight.second && !found;
                  ++subIter)
-                if (*subIter == KTokenPlayer1) {
+                if (*subIter == config.KTokenPlayer1) {
                     if (!isWallBetween(Mat, enemyIter->pos, player.pos)) {
                         found = true;
                         enemyIter->sees = true;

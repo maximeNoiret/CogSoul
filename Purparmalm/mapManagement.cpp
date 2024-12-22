@@ -7,7 +7,7 @@
 
 using namespace std;
 
-mapGrid loadMapFromFile(const string& fileName) {
+mapGrid loadMapFromFile(const string& fileName, const settings& config) {
     mapGrid roomGrid;
     ifstream mapFile (fileName);
     if (!mapFile.good()) {
@@ -20,12 +20,12 @@ mapGrid loadMapFromFile(const string& fileName) {
     mapFile >> width;
     string input;
     getline(mapFile, input);  // gets rid of doors info
-    roomGrid.assign(height, mapLine (width, KEmpty));
+    roomGrid.assign(height, mapLine (width, config.KEmpty));
     for (mapGrid::iterator iter = roomGrid.begin(); iter != roomGrid.end() && getline(mapFile, input); ++iter) {
         size_t tmpIndex = 0;
         for (mapLine::iterator subIter = iter->begin(); subIter != iter->end() && tmpIndex < input.size(); ++subIter) {
             if (input[tmpIndex] == '\n') continue;
-            *subIter = (input[tmpIndex] == ' ' ? KEmpty : input[tmpIndex]);
+            *subIter = (input[tmpIndex] == ' ' ? config.KEmpty : input[tmpIndex]);
             ++tmpIndex;
         }
     }
@@ -59,9 +59,9 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
 }
 
 
-int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y) {
+int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y, const settings& config) {
     mapGrid roomGrid;
-    roomGrid = loadMapFromFile(fileName);
+    roomGrid = loadMapFromFile(fileName, config);
     return placeRoom(gameGrid, roomGrid, x, y);
 }
 
@@ -74,7 +74,7 @@ bool isInVect(const vector<T>& vect, const T elem) {
 
 
 
-void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos) {
+void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config) {
     // Do:
     // Select a random room for the desired direction
     // Calculate position of room in gameGrid
@@ -83,7 +83,6 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
 
     // Select a random room for the desired direction
     vector<string> blacklistedMaps;
-    int roomPlaced = 1;
     char desiredDirection;
     bool cannotPlace = false;
     // attempt to place room until able to (or not)
@@ -141,7 +140,7 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
         size_t x;
         tmpFile >> x;  // get door x position relative to room origin
         CPosition roomOrigin = {pos.first - y, pos.second - x};
-        if (loadAndPlace(gameGrid, fileName, roomOrigin.second, roomOrigin.first) == 0) break;
+        if (loadAndPlace(gameGrid, fileName, roomOrigin.second, roomOrigin.first, config) == 0) break;
         blacklistedMaps.push_back(fileName);  // avoid trying again to place down a map that didn't work once
     }
     if (cannotPlace) {

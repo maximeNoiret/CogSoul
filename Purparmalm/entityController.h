@@ -10,13 +10,13 @@
  * @param[in] move : character representing entity's move
  * @param[in out] player : playerInfo object with info about the player
  */
-void moveToken (mapGrid & Mat, const char& move, CPosition& pos);
+void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config);
 
-void moveEnemies(mapGrid& gameMap, playerInfo& player, std::vector<enemyInfo>& enemies);
+void moveEnemies(mapGrid& gameMap, playerInfo& player, std::vector<enemyInfo>& enemies, const settings& config);
 
 bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& pos2);
 
-bool isPlayerSeen(const mapGrid& Mat, std::vector<enemyInfo>& enemies, const playerInfo& player);
+bool isPlayerSeen(const mapGrid& Mat, std::vector<enemyInfo>& enemies, const playerInfo& player, const settings& config);
 
 
 #endif // ENTITYCONTROLLER_H

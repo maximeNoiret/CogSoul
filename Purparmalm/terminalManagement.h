@@ -13,6 +13,13 @@ void clearScreen();
 
 void color (const unsigned & col);
 
+
+void centerOut(const std::string& out);
+
+void renderMainMenu();
+
+unsigned short mainMenu();
+
 std::string inputName();
 
 /**
@@ -27,7 +34,7 @@ void printVect(const std::vector<char>& vect);
  * @param[in] renderDist : unsigned defining render distance
  * @param[in] playerPos : position of the player
  */
-void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player);
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config);
 
 /**
  * @brief Prints a mapGrid object. ToDo: generalize function
