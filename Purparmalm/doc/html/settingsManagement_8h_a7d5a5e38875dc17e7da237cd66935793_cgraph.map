@@ -1,0 +1,5 @@
+<map id="initSettings" name="initSettings">
+<area shape="rect" id="Node000001" title="loads settings from a config file if it exists, creates one with default values if not" alt="" coords="5,5,92,32"/>
+<area shape="rect" id="Node000002" href="$settingsManagement_8cpp.html#aa46730cd68532ff709f9c0c87406a8fd" title=" " alt="" coords="140,5,183,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,16,124,16,124,21,92,21"/>
+</map>

@@ -113,7 +113,7 @@ string inputName() {
 
 void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config) {
     mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
-    placeRoom(universe, gameMap, renderDist, renderDist);
+    placeRoom(universe, gameMap, renderDist, renderDist, true);
     // simple waste of ressources (16 bytes of memory(?)) to make my life easier
     CPosition upperLeft = {player.pos.first + renderDist * 0.5, player.pos.second};
     CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5 + 1, player.pos.second + 2 * renderDist + 1};
@@ -146,6 +146,5 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
     cout << "X: " << setw(4) << player.pos.second
          << "\tY: " << setw(4) << player.pos.first
          << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No")
-         << "\tSteps: " << setw(4) << player.steps
          << endl;
 }

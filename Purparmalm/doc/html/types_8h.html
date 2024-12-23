@@ -5,17 +5,24 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Purpacman: types.h File Reference</title>
+<title>GAME NAME Project S101: types.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -25,9 +32,21 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Purpacman
+   <div id="projectname">GAME NAME Project S101
    </div>
   </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -44,22 +63,23 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() {
-  initMenu('',true,false,'search.php','Search',false);
-  $(function() { init_search(); });
-});
+$(function(){initNavTree('types_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
-<div id="main-nav"></div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
-/* @license-end */
-</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,28 +101,81 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">types.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for types.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="types_8h__incl.png" border="0" usemap="#atypes_8h" alt=""/></div>
+<map name="atypes_8h" id="atypes_8h">
+<area shape="rect" title=" " alt="" coords="116,5,180,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,56,107"/>
+<area shape="poly" title=" " alt="" coords="129,35,65,74,62,69,126,30"/>
+<area shape="rect" title=" " alt="" coords="79,80,136,107"/>
+<area shape="poly" title=" " alt="" coords="143,34,124,68,120,65,139,31"/>
+<area shape="rect" title=" " alt="" coords="161,80,214,107"/>
+<area shape="poly" title=" " alt="" coords="157,31,176,65,171,68,152,34"/>
+<area shape="rect" title=" " alt="" coords="238,80,284,107"/>
+<area shape="poly" title=" " alt="" coords="169,30,230,69,227,74,166,35"/>
+</map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="types_8h__dep__incl.png" border="0" usemap="#atypes_8hdep" alt=""/></div>
+<map name="atypes_8hdep" id="atypes_8hdep">
+<area shape="rect" title=" " alt="" coords="360,5,425,32"/>
+<area shape="rect" href="entityController_8cpp.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="poly" title=" " alt="" coords="345,24,272,29,189,39,115,56,87,68,69,82,61,99,60,118,70,154,64,155,55,118,56,97,65,78,84,63,113,51,188,34,272,24,345,19"/>
+<area shape="rect" href="entityController_8h.html" title=" " alt="" coords="79,80,199,107"/>
+<area shape="poly" title=" " alt="" coords="346,36,184,82,183,77,344,31"/>
+<area shape="rect" href="mapManagement_8cpp.html" title=" " alt="" coords="163,155,310,181"/>
+<area shape="poly" title=" " alt="" coords="347,33,303,52,282,65,264,82,253,99,245,119,240,155,234,154,240,118,248,97,260,78,278,61,300,47,345,29"/>
+<area shape="rect" href="mapManagement_8h.html" title=" " alt="" coords="274,80,407,107"/>
+<area shape="poly" title=" " alt="" coords="377,46,352,81,347,78,372,43"/>
+<area shape="rect" href="terminalManagement_8cpp.html" title=" " alt="" coords="334,155,502,181"/>
+<area shape="poly" title=" " alt="" coords="409,45,422,79,425,120,422,154,417,154,420,120,417,81,404,47"/>
+<area shape="rect" href="settingsManagement_8cpp.html" title=" " alt="" coords="653,155,820,181"/>
+<area shape="poly" title=" " alt="" coords="440,16,537,18,653,25,709,33,760,44,800,59,828,78,834,90,834,102,820,123,795,142,768,156,765,152,792,137,816,120,829,100,829,91,824,82,798,63,758,49,708,38,652,31,536,23,440,22"/>
+<area shape="rect" href="settingsManagement_8h.html" title=" " alt="" coords="482,80,636,107"/>
+<area shape="poly" title=" " alt="" coords="436,36,531,77,529,82,434,41"/>
+<area shape="rect" href="terminalManagement_8h.html" title=" " alt="" coords="660,80,813,107"/>
+<area shape="poly" title=" " alt="" coords="440,27,677,77,676,82,439,33"/>
+<area shape="poly" title=" " alt="" coords="119,120,86,156,82,152,115,116"/>
+<area shape="rect" href="main_8cpp.html" title=" " alt="" coords="526,155,600,181"/>
+<area shape="poly" title=" " alt="" coords="215,102,355,123,514,152,526,155,525,160,513,157,354,129,214,108"/>
+<area shape="poly" title=" " alt="" coords="280,114,120,157,119,151,279,109"/>
+<area shape="poly" title=" " alt="" coords="394,109,526,152,525,157,393,114"/>
+<area shape="poly" title=" " alt="" coords="312,118,256,156,253,152,309,113"/>
+<area shape="poly" title=" " alt="" coords="367,116,406,152,403,156,363,119"/>
+<area shape="poly" title=" " alt="" coords="563,122,565,154,560,154,558,123"/>
+<area shape="poly" title=" " alt="" coords="605,111,706,152,704,156,603,115"/>
+<area shape="poly" title=" " alt="" coords="693,115,595,156,593,152,691,111"/>
+<area shape="poly" title=" " alt="" coords="739,122,739,154,734,154,734,122"/>
+</map>
 </div>
 </div>
 <p><a href="types_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structplayerInfo.html">playerInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structenemyInfo.html">enemyInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsettings.html">settings</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a6f672294877bb5af9e8828a3241b9ec1" id="r_a6f672294877bb5af9e8828a3241b9ec1"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6f672294877bb5af9e8828a3241b9ec1">mapLine</a></td></tr>
@@ -111,8 +184,42 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ae05886e922c79e87ed61039d85f825cf" id="r_ae05886e922c79e87ed61039d85f825cf"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="#a6f672294877bb5af9e8828a3241b9ec1">mapLine</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae05886e922c79e87ed61039d85f825cf">mapGrid</a></td></tr>
 <tr class="memdesc:ae05886e922c79e87ed61039d85f825cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">a vector of mapLine, representing the game board/map  <br /></td></tr>
 <tr class="separator:ae05886e922c79e87ed61039d85f825cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7035b1162647d49def2c24ac2c2e30c1" id="r_a7035b1162647d49def2c24ac2c2e30c1"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; unsigned, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7035b1162647d49def2c24ac2c2e30c1">CPosition</a></td></tr>
+<tr class="separator:a7035b1162647d49def2c24ac2c2e30c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a546f360ae9faab62b22964ae62c52e25" id="r_a546f360ae9faab62b22964ae62c52e25"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a546f360ae9faab62b22964ae62c52e25">Colors</a></td></tr>
+<tr class="memdesc:a546f360ae9faab62b22964ae62c52e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">map containing each color and their terminal value equivalent  <br /></td></tr>
+<tr class="separator:a546f360ae9faab62b22964ae62c52e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a583dfbcb79f67221b98e10b5d2e20b2d" id="r_a583dfbcb79f67221b98e10b5d2e20b2d"><td class="memItemLeft" align="right" valign="top">const std::array&lt; char, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a583dfbcb79f67221b98e10b5d2e20b2d">possibleMoves</a> = {'z', 'q', 's', 'd'}</td></tr>
+<tr class="separator:a583dfbcb79f67221b98e10b5d2e20b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee8373a100da39be5abc6ebae871a12" id="r_a5ee8373a100da39be5abc6ebae871a12"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::string, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ee8373a100da39be5abc6ebae871a12">roomsUp</a> = {&quot;testRoomUp.txt&quot;, &quot;anotherRoom.txt&quot;, &quot;roomTest.txt&quot;}</td></tr>
+<tr class="separator:a5ee8373a100da39be5abc6ebae871a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4727d27f02bdd3c9889eccc7faff28a" id="r_ad4727d27f02bdd3c9889eccc7faff28a"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::string, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4727d27f02bdd3c9889eccc7faff28a">roomsRight</a> = {&quot;roomTest.txt&quot;}</td></tr>
+<tr class="separator:ad4727d27f02bdd3c9889eccc7faff28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf0234860c3f1fc6f4d3ddc379a4b00" id="r_a9bf0234860c3f1fc6f4d3ddc379a4b00"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::string, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bf0234860c3f1fc6f4d3ddc379a4b00">roomsDown</a> = {}</td></tr>
+<tr class="separator:a9bf0234860c3f1fc6f4d3ddc379a4b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae45709bdfcde92bf3c0d21a8760cd7" id="r_aaae45709bdfcde92bf3c0d21a8760cd7"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::string, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaae45709bdfcde92bf3c0d21a8760cd7">roomsLeft</a> = {&quot;anotherRoom.txt&quot;, &quot;roomTest.txt&quot;}</td></tr>
+<tr class="separator:aaae45709bdfcde92bf3c0d21a8760cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="a7035b1162647d49def2c24ac2c2e30c1" name="a7035b1162647d49def2c24ac2c2e30c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7035b1162647d49def2c24ac2c2e30c1">&#9670;&#160;</a></span>CPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::pair&lt;unsigned, unsigned&gt; <a class="el" href="#a7035b1162647d49def2c24ac2c2e30c1">CPosition</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00019">19</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
 <a id="ae05886e922c79e87ed61039d85f825cf" name="ae05886e922c79e87ed61039d85f825cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae05886e922c79e87ed61039d85f825cf">&#9670;&#160;</a></span>mapGrid</h2>
 
@@ -127,7 +234,7 @@ Typedefs</h2></td></tr>
 
 <p>a vector of mapLine, representing the game board/map </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00014">14</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00017">17</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
@@ -145,15 +252,127 @@ Typedefs</h2></td></tr>
 
 <p>a vector of characters, representing a line of the map. </p>
 
-<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00009">9</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00012">12</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a546f360ae9faab62b22964ae62c52e25" name="a546f360ae9faab62b22964ae62c52e25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a546f360ae9faab62b22964ae62c52e25">&#9670;&#160;</a></span>Colors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::map&lt;std::string, unsigned&gt; Colors</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {<span class="stringliteral">&quot;Reset&quot;</span>, 0},</div>
+<div class="line">    {<span class="stringliteral">&quot;Black&quot;</span>, 30},</div>
+<div class="line">    {<span class="stringliteral">&quot;Red&quot;</span>, 31},</div>
+<div class="line">    {<span class="stringliteral">&quot;Green&quot;</span>, 32},</div>
+<div class="line">    {<span class="stringliteral">&quot;Yellow&quot;</span>, 33},</div>
+<div class="line">    {<span class="stringliteral">&quot;Blue&quot;</span>, 34},</div>
+<div class="line">    {<span class="stringliteral">&quot;Magenta&quot;</span>, 35},</div>
+<div class="line">    {<span class="stringliteral">&quot;Cyan&quot;</span>, 36}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>map containing each color and their terminal value equivalent </p>
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00037">37</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a583dfbcb79f67221b98e10b5d2e20b2d" name="a583dfbcb79f67221b98e10b5d2e20b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a583dfbcb79f67221b98e10b5d2e20b2d">&#9670;&#160;</a></span>possibleMoves</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::array&lt;char, 4&gt; possibleMoves = {'z', 'q', 's', 'd'}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00057">57</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a9bf0234860c3f1fc6f4d3ddc379a4b00" name="a9bf0234860c3f1fc6f4d3ddc379a4b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bf0234860c3f1fc6f4d3ddc379a4b00">&#9670;&#160;</a></span>roomsDown</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::array&lt;std::string, 0&gt; roomsDown = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00060">60</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="aaae45709bdfcde92bf3c0d21a8760cd7" name="aaae45709bdfcde92bf3c0d21a8760cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae45709bdfcde92bf3c0d21a8760cd7">&#9670;&#160;</a></span>roomsLeft</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::array&lt;std::string, 2&gt; roomsLeft = {&quot;anotherRoom.txt&quot;, &quot;roomTest.txt&quot;}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00061">61</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="ad4727d27f02bdd3c9889eccc7faff28a" name="ad4727d27f02bdd3c9889eccc7faff28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4727d27f02bdd3c9889eccc7faff28a">&#9670;&#160;</a></span>roomsRight</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::array&lt;std::string, 1&gt; roomsRight = {&quot;roomTest.txt&quot;}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00059">59</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
+
+</div>
+</div>
+<a id="a5ee8373a100da39be5abc6ebae871a12" name="a5ee8373a100da39be5abc6ebae871a12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee8373a100da39be5abc6ebae871a12">&#9670;&#160;</a></span>roomsUp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::array&lt;std::string, 3&gt; roomsUp = {&quot;testRoomUp.txt&quot;, &quot;anotherRoom.txt&quot;, &quot;roomTest.txt&quot;}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types_8h_source.html#l00058">58</a> of file <a class="el" href="types_8h_source.html">types.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="types_8h.html">types.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+  </ul>
+</div>
 </body>
 </html>

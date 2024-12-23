@@ -18,9 +18,10 @@ mapGrid loadMapFromFile(const std::string& fileName, const settings& config);
  * @param[in] roomGrid : a mapGrid object that only has the room
  * @param[in] x : x position of upper left of the room in the map
  * @param[in] y : y position of upper left of the room in the map
- * @return 0 if everything went alright, 2 if the room is too tall (y), 3 if the room is too large (x)
+ * @param[in] isUniverse : boolean that indicates if the room being placed is the universe. Refer to generateRender in terminalManagement
+ * @return 0 if everything went alright, 2 if the room is too tall (y), 3 if the room is too large (x), 4 if another room would overlap
  */
-int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y);
+int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse);
 
 /**
  * @brief calls loadMapFromFile and placeRoom. Merely a QoL function.

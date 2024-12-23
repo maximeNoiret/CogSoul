@@ -1,0 +1,10 @@
+<map id="reset_input_mode" name="reset_input_mode">
+<area shape="rect" id="Node000001" title=" " alt="" coords="396,5,521,32"/>
+<area shape="rect" id="Node000002" href="$terminalManagement_8cpp.html#af08a846d6127fefbf7354ffee7d31845" title=" " alt="" coords="235,5,348,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="381,21,349,21,349,16,381,16"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="219,21,55,21,55,16,219,16"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html#a873de2e4a04d5419b0ab63b436e72f9d" title=" " alt="" coords="103,31,187,57"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="220,34,188,39,187,34,219,28"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="87,34,54,27,55,21,88,29"/>
+</map>

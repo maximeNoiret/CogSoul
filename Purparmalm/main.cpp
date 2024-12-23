@@ -18,11 +18,11 @@ int mainGame(const settings& config)
 
     bool playerWon = false;
 
-    playerInfo player = {inputName(), CPosition (25, 40), false, false, 0};
+    playerInfo player = {inputName(), CPosition (25, 40), false, false};
     vector<enemyInfo> enemies (3);
-    enemies[0] = {CPosition (14, 30), false};
-    enemies[1] = {CPosition (14, 31), false};
-    enemies[2] = {CPosition (17, 32), false};
+    // enemies[0] = {CPosition (14, 30), false};
+    // enemies[1] = {CPosition (14, 31), false};
+    // enemies[2] = {CPosition (17, 32), false};
 
     gameMap[player.pos.first][player.pos.second] = config.KTokenPlayer1;  // set player in mat
     for (const enemyInfo& enemy : enemies)

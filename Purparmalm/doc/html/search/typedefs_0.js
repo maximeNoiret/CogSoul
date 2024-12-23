@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mapgrid_0',['mapGrid',['../types_8h.html#ae05886e922c79e87ed61039d85f825cf',1,'types.h']]],
-  ['mapline_1',['mapLine',['../types_8h.html#a6f672294877bb5af9e8828a3241b9ec1',1,'types.h']]]
+  ['cposition_0',['CPosition',['../types_8h.html#a7035b1162647d49def2c24ac2c2e30c1',1,'types.h']]]
 ];

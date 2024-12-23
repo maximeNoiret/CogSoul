@@ -32,21 +32,27 @@ mapGrid loadMapFromFile(const string& fileName, const settings& config) {
     return roomGrid;
 }
 
-// FUCKING DONE EZ
-/* ToDo: add a map building process that uses a seed to procedurally generate a map out of rooms.
- *          -Each room has one or more doors with a certain direction
- *          -When player steps on a door, it generates a room in that direction
- *          -Rooms are named or have content to tell which directions they can accomodate
- *          -If no room fits the map, the door gets replaced with a tiny, tiny closet
- */
 
+// ToDo: fix how rooms can overlap each other
 
-int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y) {
+int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse) {
     if (roomGrid.size() + y > gameGrid.size()) return 2;
     if (roomGrid[0].size() + x > gameGrid[0].size()) return 3;
+    // check for other rooms
+    mapGrid::iterator mapIter = gameGrid.begin() + y + 1;
+    if (!isUniverse) {
+        for(mapLine::iterator mapLineIter = mapIter->begin() + x + 1;
+             mapIter < gameGrid.begin() + y + roomGrid.size() - 1 && *mapLineIter != '#';
+             ++mapIter) {
+            mapLineIter = mapIter->begin() + x + 1;
+            for (;mapLineIter < mapIter->begin() + x + roomGrid[0].size() - 2 && *mapLineIter != '#'; ++mapLineIter);
+        }
 
-    mapGrid::iterator mapIter = gameGrid.begin() + y;
+        if (mapIter < gameGrid.begin() + y + roomGrid.size() - 1) return 4;
+    }
 
+
+    mapIter = gameGrid.begin() + y;
     for (const mapLine& lin : roomGrid) {
         mapLine::iterator mapLineIter = mapIter->begin() + x;
         for (const char& car : lin) {
@@ -62,7 +68,7 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
 int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y, const settings& config) {
     mapGrid roomGrid;
     roomGrid = loadMapFromFile(fileName, config);
-    return placeRoom(gameGrid, roomGrid, x, y);
+    return placeRoom(gameGrid, roomGrid, x, y, false);
 }
 
 template<typename T>

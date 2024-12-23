@@ -40,10 +40,11 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
         break;
     }
     // if player moves on a door
-    if (Mat[pos.first][pos.second] == '1' ||
-        Mat[pos.first][pos.second] == '2' ||
-        Mat[pos.first][pos.second] == '3' ||
-        Mat[pos.first][pos.second] == '4')
+    if (currPlayer == config.KTokenPlayer1 &&
+        (Mat[pos.first][pos.second] == '1' ||
+         Mat[pos.first][pos.second] == '2' ||
+         Mat[pos.first][pos.second] == '3' ||
+         Mat[pos.first][pos.second] == '4'))
         generateRoom(Mat, Mat[pos.first][pos.second], pos, config);
     Mat[pos.first][pos.second] = currPlayer;
 } // moveToken
@@ -111,7 +112,7 @@ bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& p
 bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerInfo& player, const settings& config) {
     unsigned radius = 2;
     mapGrid universe (Mat.size()+ 2 * radius, mapLine (Mat[0].size()+ 2 * radius, ' '));
-    placeRoom(universe, Mat, radius, radius);
+    placeRoom(universe, Mat, radius, radius, true);
     bool found = false;
     for (vector<enemyInfo>::iterator enemyIter = enemies.begin(); enemyIter < enemies.end() && !found; ++enemyIter) {
         const CPosition upperLeft = {enemyIter->pos.first, enemyIter->pos.second};
