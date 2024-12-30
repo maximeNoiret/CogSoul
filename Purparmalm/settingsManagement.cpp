@@ -24,16 +24,16 @@ void initSettings(settings& config) {
                       << "KColorPlayer1 : " << config.KColorPlayer1 << '\n'
                       << "KEmpty        : " << config.KEmpty << '\n'
                       << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
-                      << "KTokenPlayer1 : " << config.KTokenPlayer1;
+                      << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
+                      << "KOutBox       : " << config.KOutBox;
         newConfigFile.close();
         configFile.close();
         configFile.open("config.yaml");
     }
     map<string, string> configValues;
     for(string input;getline(configFile, input);) {
-        cout << '\'' << input << '\'' << '\t';
+        if (input[0] == '#') continue;  // ignore comments
         trim(input);
-        cout << '\'' << input << '\'' << endl;
         size_t semiColon = input.find(":");
         configValues[input.substr(0, semiColon)] = input.substr(semiColon+1);
     }
@@ -44,6 +44,8 @@ void initSettings(settings& config) {
     config.KEmpty = configValues.find("KEmpty")->second[0];
     config.KTokenEnemy = configValues.find("KTokenEnemy")->second[0];
     config.KTokenPlayer1 = configValues.find("KTokenPlayer1")->second[0];
+    cout << configValues.find("KOutBox")->second << endl;
+    config.KOutBox = stoul(configValues.find("KOutBox")->second);
 }
 
 // uh... wtf is this? Monster Energy makes me black out and write code like this????
@@ -68,16 +70,22 @@ void renderSettingsMenu(const unsigned short& select, const settings& config){
     color((select == 3 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     cout << config.KColorEnemy << endl;
     color(Colors.find("Reset")->second);
+    cout << left << setw(30) << "Outline Style : ";
+    color((select == 4 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    cout << (config.KOutBox == 0 ? "None" :
+             config.KOutBox == 1 ? "Ascii" :
+             config.KOutBox == 2 ? "Single" : "Double") << endl;
+    color(Colors.find("Reset")->second);
 
 
     cout << '\n' << '\n';
-    color((select == 4 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    color((select == 5 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
 
 void settingsMenu(settings& config) {
-    for (unsigned short select = 0;select < 4;) {
+    for (unsigned short select = 0;select < 5;) {
         for(char input = 0;input != 10;) {
             renderSettingsMenu(select, config);
             read(STDIN_FILENO, &input, 1);
@@ -86,7 +94,7 @@ void settingsMenu(settings& config) {
                 if (select > 0) --select;
                 break;
             case 's':
-                if (select < 4) ++select;
+                if (select < 5) ++select;
                 break;
             }
         }
@@ -112,6 +120,10 @@ void settingsMenu(settings& config) {
             if (currentEColor == Colors.end()) currentEColor = Colors.begin();
             config.KColorEnemy = currentEColor->first;
             break;
+        case 4:
+            if (config.KOutBox == 3) config.KOutBox = 0;
+            else ++config.KOutBox;
+            break;
         }
     }
     color(Colors.find("Reset")->second);
@@ -121,6 +133,7 @@ void settingsMenu(settings& config) {
                << "KColorPlayer1 : " << config.KColorPlayer1 << '\n'
                << "KEmpty        : " << config.KEmpty << '\n'
                << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
-               << "KTokenPlayer1 : " << config.KTokenPlayer1;
+               << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
+               << "KOutBox       : " << config.KOutBox;
     configFile.close();
 }

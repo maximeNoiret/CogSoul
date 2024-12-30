@@ -18,6 +18,12 @@ typedef std::vector<mapLine> mapGrid;
 
 typedef std::pair<unsigned, unsigned> CPosition;
 
+// logs placed in namespace to avoid boulettes (I know global vars are bad and accept the -1)
+namespace Logs {
+    void addLog(const std::string& log);
+    const std::vector<std::string>& getLogs();
+}
+
 struct playerInfo {
     std::string name;
     CPosition pos;
@@ -51,6 +57,7 @@ struct settings {
     char        KEmpty        = '_';
     char        KTokenEnemy   = 'O';
     char        KTokenPlayer1 = '@';
+    unsigned    KOutBox       = 3;  // 0=none,1=ascii,2=single,3=double
 };
 
 // using arrays to save on ressources (I think lmao)

@@ -16,6 +16,7 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
             Mat[pos.first - 1][pos.second] != config.KTokenEnemy) {
             --pos.first;
         }
+        if (currPlayer == config.KTokenPlayer1) Logs::addLog("Moving up.");
         break;
     case 'q':
         if (pos.second > 0 &&
@@ -23,6 +24,7 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
             Mat[pos.first][pos.second - 1] != config.KTokenEnemy) {
             --pos.second;
         }
+        if (currPlayer == config.KTokenPlayer1) Logs::addLog("Moving left.");
         break;
     case 's':
         if (pos.first < Mat.size()-1 &&
@@ -30,6 +32,7 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
             Mat[pos.first + 1][pos.second] != config.KTokenEnemy) {
             ++pos.first;
         }
+        if (currPlayer == config.KTokenPlayer1) Logs::addLog("Moving down.");
         break;
     case 'd':
         if (pos.second < Mat[pos.first].size()-1 &&
@@ -37,6 +40,7 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
             Mat[pos.first][pos.second + 1] != config.KTokenEnemy) {
             ++pos.second;
         }
+        if (currPlayer == config.KTokenPlayer1) Logs::addLog("Moving right.");
         break;
     }
     // if player moves on a door

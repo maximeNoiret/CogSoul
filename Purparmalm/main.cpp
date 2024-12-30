@@ -28,7 +28,7 @@ int mainGame(const settings& config)
     for (const enemyInfo& enemy : enemies)
         gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
     // main gameLoop
-    for (char input; !player.dead && !playerWon;) {
+    for (char input = 0; !player.dead && !playerWon && input != 27;) {
         clearScreen();
         generateRender(gameMap, 10, player, config);
         read(STDIN_FILENO, &input, 1);
@@ -49,6 +49,7 @@ int main() {
     settings config;
     initSettings(config);
     set_input_mode();
+    // Lore logs
     for(unsigned short select = 0;select < 2;) {
         select = mainMenu();
         switch(select) {

@@ -120,13 +120,26 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
 
     // print rendered map
     // test if weird box characters work in any systems (test it in a fresh linux distro)
-    cout << '\t' << "╔";
-    for(unsigned i = 0; i < renderDist*2+1; ++i) cout << "═";
-    cout << "╗" << endl;
+    // └─ nvm, just fixed it by adding it as an option and adding an ascii version
+    if (config.KOutBox > 0) {
+        cout << '\t' << (config.KOutBox == 1 ? "+" :
+                             config.KOutBox == 2 ? "\u250C" : "\u2554");
+        for(unsigned i = 0; i < renderDist*2+1; ++i)
+            cout << (config.KOutBox == 1 ? "-" :
+                         config.KOutBox == 2 ? "\u2500" : "\u2550");
+        cout << (config.KOutBox == 1 ? "+" :
+                     config.KOutBox == 2 ? "\u2510" : "\u2557");
+    }
+    cout << endl;
+    const vector<string> logs = Logs::getLogs();
+    unsigned logIndex = 0;  // unsigned is fine since log size is fixed
     for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
          iter < universe.begin() + bottomRight.first;
          ++iter) {
-        cout << '\t' << "║";
+        cout << '\t';
+        if (config.KOutBox > 0)
+            cout << (config.KOutBox == 1 ? "|" :
+                             config.KOutBox == 2 ? "\u2502" : "\u2551");
         for (mapLine::const_iterator subIter = iter->begin() + upperLeft.second;
              subIter < iter->begin() + bottomRight.second;
              ++subIter) {
@@ -136,15 +149,28 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
             cout << (*subIter == '1' || *subIter == '3' ? '-' :
                      *subIter == '2' || *subIter == '4' ? '|' : *subIter);
         }
-        cout << "║" << endl;
+        if (config.KOutBox > 0)
+            cout << (config.KOutBox == 1 ? "|" :
+                     config.KOutBox == 2 ? "\u2502" : "\u2551");
+        if (logIndex < logs.size()) {
+            cout << string(8, ' ') << logs[logIndex];
+            ++logIndex;
+        }
+        cout << endl;
     }
-    cout << '\t' << "╚";
-    for(unsigned i = 0; i < renderDist*2+1; ++i) cout << "═";
-    cout << "╝" << endl;
+    if (config.KOutBox > 0) {
+        cout << '\t' << (config.KOutBox == 1 ? "+" :
+                         config.KOutBox == 2 ? "\u2514" : "\u255A");
+        for(unsigned i = 0; i < renderDist*2+1; ++i)
+            cout << (config.KOutBox == 1 ? "-" :
+                     config.KOutBox == 2 ? "\u2500" : "\u2550");
+        cout << (config.KOutBox == 1 ? "+" :
+                 config.KOutBox == 2 ? "\u2518" : "\u255D");
+    }
+    cout << '\n';
     // print info
-    cout << endl << endl;
+    cout << '\n' << '\n';
     cout << "X: " << setw(4) << player.pos.second
          << "\tY: " << setw(4) << player.pos.first
-         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No")
-         << endl;
+         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No");
 }

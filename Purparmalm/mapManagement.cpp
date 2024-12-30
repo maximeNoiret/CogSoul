@@ -169,6 +169,9 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
                 break;
         };
     }
+    else {
+        Logs::addLog("Analyzing room...");
+    }
 }
 
 
