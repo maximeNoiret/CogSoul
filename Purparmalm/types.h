@@ -19,6 +19,7 @@ typedef std::vector<mapLine> mapGrid;
 typedef std::pair<unsigned, unsigned> CPosition;
 
 // logs placed in namespace to avoid boulettes (I know global vars are bad and accept the -1)
+// dunno if this still applies since now there's only functions? since logs is still in the namespace?
 namespace Logs {
     void addLog(const std::string& log);
     void setLog(const size_t& pos, const std::string& log);

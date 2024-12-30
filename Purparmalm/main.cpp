@@ -7,6 +7,8 @@
 
 using namespace std;
 
+// PLEASE TELL ME, IS THERE A WAY TO HAVE ACCESS TO config WITHOUT PUTTING IT EVERY FUCKING WHERE?????
+// without just doing a global variable cuz I heard those suck lmao
 
 int mainGame(const settings& config)
 {
