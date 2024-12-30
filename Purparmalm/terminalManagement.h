@@ -7,6 +7,7 @@
 void reset_input_mode();
 void set_input_mode();
 
+void milSleep(const unsigned& milliseconds);
 
 void clearScreen();
 
@@ -44,5 +45,8 @@ std::string inputName();
  * @param[in] config : settings of the game
  */
 void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config);
+
+
+void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config);
 
 #endif // TERMINALMANAGEMENT_H

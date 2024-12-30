@@ -25,7 +25,8 @@ void initSettings(settings& config) {
                       << "KEmpty        : " << config.KEmpty << '\n'
                       << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
                       << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
-                      << "KOutBox       : " << config.KOutBox;
+                      << "KOutBox       : " << config.KOutBox << '\n'
+                      << "KSkipIntro    : " << config.KSkipIntro;
         newConfigFile.close();
         configFile.close();
         configFile.open("config.yaml");
@@ -44,8 +45,8 @@ void initSettings(settings& config) {
     config.KEmpty = configValues.find("KEmpty")->second[0];
     config.KTokenEnemy = configValues.find("KTokenEnemy")->second[0];
     config.KTokenPlayer1 = configValues.find("KTokenPlayer1")->second[0];
-    cout << configValues.find("KOutBox")->second << endl;
     config.KOutBox = stoul(configValues.find("KOutBox")->second);
+    config.KSkipIntro = (configValues.find("KSkipIntro")->second == "0" ? false : true);
 }
 
 // uh... wtf is this? Monster Energy makes me black out and write code like this????
@@ -76,16 +77,19 @@ void renderSettingsMenu(const unsigned short& select, const settings& config){
              config.KOutBox == 1 ? "Ascii" :
              config.KOutBox == 2 ? "Single" : "Double") << endl;
     color(Colors.find("Reset")->second);
-
+    cout << left << setw(30) << "Skip Intro Sequence : ";
+    color((select == 5 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    cout << (config.KSkipIntro == 0 ? "No" : "Yes") << endl;
+    color(Colors.find("Reset")->second);
 
     cout << '\n' << '\n';
-    color((select == 5 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    color((select == 6 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
 
 void settingsMenu(settings& config) {
-    for (unsigned short select = 0;select < 5;) {
+    for (unsigned short select = 0;select < 6;) {
         for(char input = 0;input != 10;) {
             renderSettingsMenu(select, config);
             read(STDIN_FILENO, &input, 1);
@@ -94,7 +98,7 @@ void settingsMenu(settings& config) {
                 if (select > 0) --select;
                 break;
             case 's':
-                if (select < 5) ++select;
+                if (select < 6) ++select;
                 break;
             }
         }
@@ -124,6 +128,9 @@ void settingsMenu(settings& config) {
             if (config.KOutBox == 3) config.KOutBox = 0;
             else ++config.KOutBox;
             break;
+        case 5:
+            config.KSkipIntro = !config.KSkipIntro;
+            break;
         }
     }
     color(Colors.find("Reset")->second);
@@ -134,6 +141,7 @@ void settingsMenu(settings& config) {
                << "KEmpty        : " << config.KEmpty << '\n'
                << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
                << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
-               << "KOutBox       : " << config.KOutBox;
+               << "KOutBox       : " << config.KOutBox << '\n'
+               << "KSkipIntro    : " << config.KSkipIntro;
     configFile.close();
 }

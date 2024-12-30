@@ -3,15 +3,10 @@
 
 using namespace std;
 
+// PS: I know using a class would make this not vomit inducing, but dunno how to use those and
+//      can't be bothered to explain it to my team if I learn how
 namespace Logs {
-    vector<string> logs = {"LOGS_2078-04-29_23-12-09.2408751",
-                           "Initializing...",
-                           "Visual sensors: OK",
-                           "Motion sensors: OK",
-                           "AI: ERROR",
-                           "Attempting Troubleshoot... ERROR",
-                           "Big boulette detected!",
-                           "Attempting Shutdown... ERROR"};
+    vector<string> logs(8);
 
     void addLog(const string& log){
         // Slide all elem back
@@ -21,6 +16,10 @@ namespace Logs {
         logs[logs.size()-1] = log;
 
         // This avoids push_back and erase, which fuck up the memory I think? lmao idk
+    }
+
+    void setLog(const size_t& pos, const string& log) {
+        logs[pos] = log;
     }
 
     const vector<string>& getLogs() {

@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <iomanip>
+#include <thread>
+#include <chrono>
 #include "types.h"
 #include "mapManagement.h"
 
@@ -34,6 +36,12 @@ void set_input_mode() {
     tattr.c_cc[VTIME] = 0;
     tcsetattr (STDIN_FILENO, TCSAFLUSH, &tattr);
 }
+
+
+void milSleep(const unsigned& milliseconds) {
+    this_thread::sleep_for(chrono::milliseconds(milliseconds));
+}
+
 
 
 void clearScreen() {
@@ -172,5 +180,55 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
     cout << '\n' << '\n';
     cout << "X: " << setw(4) << player.pos.second
          << "\tY: " << setw(4) << player.pos.first
-         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No");
+         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No") << endl;
+}
+
+
+
+void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config) {
+    clearScreen();
+    cout.flush();
+    milSleep(1000);
+    cout << "Booting up...";
+    cout.flush();
+    milSleep(1000 + rand() % 1000);
+    clearScreen();
+    cout << "LOGS_2078-04-29_23-12-09.2408751" << '\n' << "Initializing..." << endl;
+    milSleep(1000 + rand() % 1000);  // between 1000 and 2000 mil
+    cout << "Visual Sensors...";
+    cout.flush();
+    milSleep(1500 + rand() % 1500);
+    for (unsigned i = 2; i < 11; ++i) {
+        milSleep(100);
+        clearScreen();
+        generateRender(gameMap, i, player, config);
+    }
+    Logs::setLog(2, "Visual Sensors... OK");
+    Logs::setLog(3, "Motion Sensors...");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(1000 + rand() % 500);
+    Logs::setLog(3, "Motion Sensors... OK");
+    Logs::setLog(4, "AI...");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(3000 + rand() % 2000);
+    Logs::setLog(4, "AI... ERROR");
+    Logs::setLog(5, "Attempting Troubleshoot...");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(2000 + rand() % 1000);
+    Logs::setLog(5, "Attempting Troubleshoot... ERROR");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(1000);
+    Logs::setLog(6, "Big boulette detected!");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(1000);
+    Logs::setLog(7, "Attempting Shutdown...");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
+    milSleep(3000 + rand() % 2000);
+    Logs::setLog(7, "Attempting Shutdown... ERROR");
 }

@@ -21,6 +21,7 @@ typedef std::pair<unsigned, unsigned> CPosition;
 // logs placed in namespace to avoid boulettes (I know global vars are bad and accept the -1)
 namespace Logs {
     void addLog(const std::string& log);
+    void setLog(const size_t& pos, const std::string& log);
     const std::vector<std::string>& getLogs();
 }
 
@@ -58,6 +59,7 @@ struct settings {
     char        KTokenEnemy   = 'O';
     char        KTokenPlayer1 = '@';
     unsigned    KOutBox       = 3;  // 0=none,1=ascii,2=single,3=double
+    bool        KSkipIntro    = false;
 };
 
 // using arrays to save on ressources (I think lmao)

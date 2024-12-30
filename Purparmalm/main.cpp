@@ -27,7 +27,24 @@ int mainGame(const settings& config)
     gameMap[player.pos.first][player.pos.second] = config.KTokenPlayer1;  // set player in mat
     for (const enemyInfo& enemy : enemies)
         gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
+
+    Logs::setLog(0, "LOGS_2078-04-29_23-12-09.2408751");
+    Logs::setLog(1, "Initializing...");
+    Logs::setLog(2, "Visual Sensors...");
+    for (size_t i = 3; i < 8; ++i)
+        Logs::setLog(i, "");
+    if (!config.KSkipIntro) introSequence(gameMap, player, config);
+    else {
+        Logs::setLog(2, "Visual Sensors... OK");
+        Logs::setLog(3, "Motion Sensors... OK");
+        Logs::setLog(4, "AI... ERROR");
+        Logs::setLog(5, "Attempting Troubleshoot... ERROR");
+        Logs::setLog(6, "Big boulette detected!");
+        Logs::setLog(7, "Attempting Shutdown... ERROR");
+    }
+
     // main gameLoop
+    cin.ignore();
     for (char input = 0; !player.dead && !playerWon && input != 27;) {
         clearScreen();
         generateRender(gameMap, 10, player, config);
