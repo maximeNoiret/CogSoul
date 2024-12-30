@@ -8,7 +8,8 @@ SOURCES += \
         main.cpp \
         mapManagement.cpp \
         settingsManagement.cpp \
-        terminalManagement.cpp
+        terminalManagement.cpp \
+        types.cpp
 
 HEADERS += \
     entityController.h \
