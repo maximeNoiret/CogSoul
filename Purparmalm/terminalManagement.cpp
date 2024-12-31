@@ -227,26 +227,26 @@ void introSequence(const mapGrid& gameMap, const playerInfo& player, const setti
         clearScreen();
         generateRender(gameMap, i, player, config);
     }
-    Logs::setLog(2, "Visual Sensors... OK");
+    Logs::setLog(2, "Visual Sensors... \033[32mOK\033[0m");
     Logs::setLog(3, "Motion Sensors...");
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(1000 + rand() % 500);
-    Logs::setLog(3, "Motion Sensors... OK");
+    Logs::setLog(3, "Motion Sensors... \033[32mOK\033[0m");
     Logs::setLog(4, "AI...");
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(3000 + rand() % 2000);
-    Logs::setLog(4, "AI... ERROR");
+    Logs::setLog(4, "AI... \033[31mERROR\033[0m");
     Logs::setLog(5, "Attempting Troubleshoot...");
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(2000 + rand() % 1000);
-    Logs::setLog(5, "Attempting Troubleshoot... ERROR");
+    Logs::setLog(5, "Attempting Troubleshoot... \033[31mERROR\033[0m");
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(1000);
-    Logs::setLog(6, "Big boulette detected!");
+    Logs::setLog(6, "\033[33mBig boulette detected!\033[0m");
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(1000);
@@ -254,5 +254,7 @@ void introSequence(const mapGrid& gameMap, const playerInfo& player, const setti
     clearScreen();
     generateRender(gameMap, 10, player, config);
     milSleep(3000 + rand() % 2000);
-    Logs::setLog(7, "Attempting Shutdown... ERROR");
+    Logs::setLog(7, "Attempting Shutdown... \033[31mERROR\033[0m");
+    clearScreen();
+    generateRender(gameMap, 10, player, config);
 }

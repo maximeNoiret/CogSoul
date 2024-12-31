@@ -40,12 +40,12 @@ int mainGame(const settings& config)
         introSequence(gameMap, player, config);
         cin.ignore();
     } else {
-        Logs::setLog(2, "Visual Sensors... OK");
-        Logs::setLog(3, "Motion Sensors... OK");
-        Logs::setLog(4, "AI... ERROR");
-        Logs::setLog(5, "Attempting Troubleshoot... ERROR");
-        Logs::setLog(6, "Big boulette detected!");
-        Logs::setLog(7, "Attempting Shutdown... ERROR");
+        Logs::setLog(2, "Visual Sensors... \033[32mOK\033[0m");
+        Logs::setLog(3, "Motion Sensors... \033[32mOK\033[0m");
+        Logs::setLog(4, "AI... \033[31mERROR\033[0m");
+        Logs::setLog(5, "Attempting Troubleshoot... \033[31mERROR\033[0m");
+        Logs::setLog(6, "\033[33mBig boulette detected!\033[0m");
+        Logs::setLog(7, "Attempting Shutdown... \033[31mERROR\033[0m");
     }
 
     // main gameLoop
