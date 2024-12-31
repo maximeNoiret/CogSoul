@@ -69,9 +69,12 @@ void renderMainMenu(const short& select) {
     centerOut("Play");
     cout << '\n';
     color((select == 1 ? Colors.find("Green")->second : Colors.find("Reset")->second));
-    centerOut("Settings");
+    centerOut("Help");
     cout << '\n';
     color((select == 2 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Settings");
+    cout << '\n';
+    color((select == 3 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
@@ -87,11 +90,31 @@ unsigned short mainMenu() {
             if (select > 0) --select;
             break;
         case 's':
-            if (select < 2) ++select;
+            if (select < 3) ++select;
             break;
         }
     }
     return select;
+}
+
+// Add custom keybinds for movements and inspect
+void helpMenu(const settings& config) {
+    clearScreen();
+    char input;
+    cout << "The objective of the game is to escape from a research facility," << '\n'
+         << "avoiding detection from researchers and finding keys to open doors." << '\n'
+         << "As an advanced robot in the year 2078, you can see through walls," << '\n'
+         << "but only in a small radius and only see rooms you've been to and analyzed." << '\n' << '\n'
+         << "Keybinds:" << '\n'
+         << '\t' << "Move up:    " << 'Z' << '\n'
+         << '\t' << "Move right: " << 'D' << '\n'
+         << '\t' << "Move down:  " << 'S' << '\n'
+         << '\t' << "Move left:  " << 'Q' << '\n' << '\n' << '\n';
+    color(Colors.find("Green")->second);
+    centerOut("Back");
+    read(STDIN_FILENO, &input, 1);
+    color(Colors.find("Reset")->second);
+    return;
 }
 
 

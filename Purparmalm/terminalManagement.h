@@ -25,6 +25,9 @@ void renderMainMenu();
  */
 unsigned short mainMenu();
 
+
+void helpMenu(const settings& config);
+
 /**
  * @brief Lets the user input their name in an interactive way
  * @return the name from the user

@@ -30,6 +30,7 @@ int mainGame(const settings& config)
     for (const enemyInfo& enemy : enemies)
         gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
 
+    // intro sequence
     Logs::setLog(0, "LOGS_2078-04-29_23-12-09.2408751");
     Logs::setLog(1, "Initializing...");
     Logs::setLog(2, "Visual Sensors...");
@@ -56,6 +57,7 @@ int mainGame(const settings& config)
         moveEnemies(gameMap, player, enemies, config);
         player.seen = isPlayerSeen(gameMap, enemies, player, config);
     }
+
     if (player.dead) {
         clearScreen();
         cout << "A scientist found you!" << endl << "GAME OVER" << endl << endl;
@@ -70,13 +72,16 @@ int main() {
     initSettings(config);
     set_input_mode();
     // Lore logs
-    for(unsigned short select = 0;select < 2;) {
+    for(unsigned short select = 0;select < 3;) {
         select = mainMenu();
         switch(select) {
         case 0:
             mainGame(config);
             break;
         case 1:
+            helpMenu(config);
+            break;
+        case 2:
             settingsMenu(config);
             break;
         }
