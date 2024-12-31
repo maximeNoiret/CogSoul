@@ -12,7 +12,7 @@ using namespace std;
 
 int mainGame(const settings& config)
 {
-    srand(time(NULL));
+    srand((config.KSeed.size() == 0 || !isdigit(config.KSeed[0]) ? time(NULL) : stoul(config.KSeed)));  // ToDo: add better seed system
     mapGrid gameMap (50, mapLine (80, config.KEmpty));
     loadAndPlace(gameMap, "rooms/testProceduralDoors.txt", 35, 20, config);
 
@@ -35,8 +35,10 @@ int mainGame(const settings& config)
     Logs::setLog(2, "Visual Sensors...");
     for (size_t i = 3; i < 8; ++i)
         Logs::setLog(i, "");
-    if (!config.KSkipIntro) introSequence(gameMap, player, config);
-    else {
+    if (!config.KSkipIntro) {
+        introSequence(gameMap, player, config);
+        cin.ignore();
+    } else {
         Logs::setLog(2, "Visual Sensors... OK");
         Logs::setLog(3, "Motion Sensors... OK");
         Logs::setLog(4, "AI... ERROR");
@@ -46,7 +48,6 @@ int mainGame(const settings& config)
     }
 
     // main gameLoop
-    cin.ignore();
     for (char input = 0; !player.dead && !playerWon && input != 27;) {
         clearScreen();
         generateRender(gameMap, 10, player, config);

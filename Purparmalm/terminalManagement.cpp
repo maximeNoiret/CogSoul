@@ -138,7 +138,7 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
         cout << (config.KOutBox == 1 ? "+" :
                      config.KOutBox == 2 ? "\u2510" : "\u2557");
     }
-    cout << endl;
+    cout << '\n';
     const vector<string> logs = Logs::getLogs();
     unsigned logIndex = 0;  // unsigned is fine since log size is fixed
     for (mapGrid::const_iterator iter = universe.begin() + upperLeft.first;
@@ -164,7 +164,7 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
             cout << string(8, ' ') << logs[logIndex];
             ++logIndex;
         }
-        cout << endl;
+        cout << '\n';
     }
     if (config.KOutBox > 0) {
         cout << '\t' << (config.KOutBox == 1 ? "+" :
@@ -180,7 +180,8 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
     cout << '\n' << '\n';
     cout << "X: " << setw(4) << player.pos.second
          << "\tY: " << setw(4) << player.pos.first
-         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No") << endl;
+         << "\tCaught: " << setw(4) << (player.seen ? "Yes" : "No");
+    cout.flush();  // WHY THE FUCK WON'T IT FLUSH I'LL FLUSH IT THE FUCK DOWN THE SHITTER IF IT CONTINUES
 }
 
 

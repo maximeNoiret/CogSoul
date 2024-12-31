@@ -61,6 +61,7 @@ struct settings {
     char        KTokenPlayer1 = '@';
     unsigned    KOutBox       = 3;  // 0=none,1=ascii,2=single,3=double
     bool        KSkipIntro    = false;
+    std::string KSeed         = "";
 };
 
 // using arrays to save on ressources (I think lmao)

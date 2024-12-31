@@ -26,7 +26,8 @@ void initSettings(settings& config) {
                       << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
                       << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
                       << "KOutBox       : " << config.KOutBox << '\n'
-                      << "KSkipIntro    : " << config.KSkipIntro;
+                      << "KSkipIntro    : " << config.KSkipIntro << '\n'
+                      << "KSeed         : " << config.KSeed;
         newConfigFile.close();
         configFile.close();
         configFile.open("config.yaml");
@@ -47,6 +48,7 @@ void initSettings(settings& config) {
     config.KTokenPlayer1 = configValues.find("KTokenPlayer1")->second[0];
     config.KOutBox = stoul(configValues.find("KOutBox")->second);
     config.KSkipIntro = (configValues.find("KSkipIntro")->second == "0" ? false : true);
+    config.KSeed = configValues.find("KSeed")->second;
 }
 
 // uh... wtf is this? Monster Energy makes me black out and write code like this????
@@ -81,15 +83,20 @@ void renderSettingsMenu(const unsigned short& select, const settings& config){
     color((select == 5 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     cout << (config.KSkipIntro == 0 ? "No" : "Yes") << endl;
     color(Colors.find("Reset")->second);
+    cout << left << setw(30) << "Seed : ";
+    color((select == 6 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    cout << (config.KSeed.size() == 0 ? "None" : config.KSeed) << endl;
+    color(Colors.find("Reset")->second);
+
 
     cout << '\n' << '\n';
-    color((select == 6 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    color((select == 7 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
 
 void settingsMenu(settings& config) {
-    for (unsigned short select = 0;select < 6;) {
+    for (unsigned short select = 0;select < 7;) {
         for(char input = 0;input != 10;) {
             renderSettingsMenu(select, config);
             read(STDIN_FILENO, &input, 1);
@@ -98,13 +105,13 @@ void settingsMenu(settings& config) {
                 if (select > 0) --select;
                 break;
             case 's':
-                if (select < 6) ++select;
+                if (select < 7) ++select;
                 break;
             }
         }
         map<string, unsigned>::const_iterator currentPColor = Colors.find(config.KColorPlayer1);
         map<string, unsigned>::const_iterator currentEColor = Colors.find(config.KColorEnemy);
-        char input;
+        char input = 0;
         switch (select) {
         case 0:
             read(STDIN_FILENO, &input, 1);
@@ -131,6 +138,16 @@ void settingsMenu(settings& config) {
         case 5:
             config.KSkipIntro = !config.KSkipIntro;
             break;
+        case 6:
+            config.KSeed = "";
+            renderSettingsMenu(select, config);
+            for (;;) {
+                read(STDIN_FILENO, &input, 1);
+                if (input == 10 || config.KSeed.size() == 9) break;
+                config.KSeed += input;
+                renderSettingsMenu(select, config);
+            }
+            break;
         }
     }
     color(Colors.find("Reset")->second);
@@ -142,6 +159,7 @@ void settingsMenu(settings& config) {
                << "KTokenEnemy   : " << config.KTokenEnemy << '\n'
                << "KTokenPlayer1 : " << config.KTokenPlayer1 << '\n'
                << "KOutBox       : " << config.KOutBox << '\n'
-               << "KSkipIntro    : " << config.KSkipIntro;
+               << "KSkipIntro    : " << config.KSkipIntro << '\n'
+               << "KSeed         : " << config.KSeed;
     configFile.close();
 }
