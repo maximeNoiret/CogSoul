@@ -14,21 +14,21 @@ int mainGame(const settings& config)
 {
     srand((config.KSeed.size() == 0 || !isdigit(config.KSeed[0]) ? time(NULL) : stoul(config.KSeed)));  // ToDo: add better seed system
     mapGrid gameMap (50, mapLine (80, config.KEmpty));
-    loadAndPlace(gameMap, "rooms/testProceduralDoors.txt", 35, 20, config);
 
     set_input_mode();
 
     bool playerWon = false;
 
     playerInfo player = {inputName(), CPosition (25, 40), false, false};
-    vector<enemyInfo> enemies (3);
+    vector<enemyInfo> enemies;
     // enemies[0] = {CPosition (14, 30), false};
     // enemies[1] = {CPosition (14, 31), false};
     // enemies[2] = {CPosition (17, 32), false};
+    loadAndPlace(gameMap, "rooms/testProceduralDoors.txt", 35, 20, config, enemies);
 
     gameMap[player.pos.first][player.pos.second] = config.KTokenPlayer1;  // set player in mat
-    for (const enemyInfo& enemy : enemies)
-        gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
+    // for (const enemyInfo& enemy : enemies)
+    //     gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
 
     // intro sequence
     Logs::setLog(0, "LOGS_2078-04-29_23-12-09.2408751");
@@ -37,7 +37,7 @@ int mainGame(const settings& config)
     for (size_t i = 3; i < 8; ++i)
         Logs::setLog(i, "");
     if (!config.KSkipIntro) {
-        introSequence(gameMap, player, config);
+        introSequence(gameMap, player, config, enemies);
         cin.ignore();
     } else {
         Logs::setLog(2, "Visual Sensors... \033[32mOK\033[0m");
@@ -51,9 +51,9 @@ int mainGame(const settings& config)
     // main gameLoop
     for (char input = 0; !player.dead && !playerWon && input != 27;) {
         clearScreen();
-        generateRender(gameMap, 10, player, config);
+        generateRender(gameMap, 10, player, config, enemies);
         read(STDIN_FILENO, &input, 1);
-        moveToken(gameMap, input, player.pos, config);
+        moveToken(gameMap, input, player.pos, config, enemies);
         moveEnemies(gameMap, player, enemies, config);
         player.seen = isPlayerSeen(gameMap, enemies, player, config);
     }
@@ -73,7 +73,7 @@ int main() {
     set_input_mode();
     // Lore logs
     for(unsigned short select = 0;select < 3;) {
-        select = mainMenu();
+        select = mainMenu(config);
         switch(select) {
         case 0:
             mainGame(config);

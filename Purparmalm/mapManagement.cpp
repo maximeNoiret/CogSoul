@@ -33,9 +33,9 @@ mapGrid loadMapFromFile(const string& fileName, const settings& config) {
 }
 
 
-// ToDo: fix how rooms can overlap each other
-
-int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse) {
+// WTF is this FUCKING CURSED ASS SHITTY function???
+// look at ALL THESE PARAMETERS like WTF??? We're not in FUCKING PYTHON you IDIOT
+int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse, const char& enemyToken, vector<enemyInfo>& enemies) {
     if (roomGrid.size() + y > gameGrid.size()) return 2;
     if (roomGrid[0].size() + x > gameGrid[0].size()) return 3;
     // check for other rooms
@@ -53,22 +53,30 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
 
 
     mapIter = gameGrid.begin() + y;
+    CPosition potEnemy = {y, x};
     for (const mapLine& lin : roomGrid) {
         mapLine::iterator mapLineIter = mapIter->begin() + x;
         for (const char& car : lin) {
             if (*mapLineIter != '#') *mapLineIter = car;
+            if (!isUniverse && *mapLineIter == 'O') {
+                *mapLineIter = enemyToken;
+                enemies.push_back({CPosition (potEnemy.first, potEnemy.second), false});
+            }
             ++mapLineIter;
+            ++potEnemy.second;
         }
         ++mapIter;
+        potEnemy.second = x;
+        ++potEnemy.first;
     }
     return 0;
 }
 
 
-int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y, const settings& config) {
+int loadAndPlace(mapGrid& gameGrid, const string& fileName, const size_t& x, const size_t y, const settings& config, vector<enemyInfo>& enemies) {
     mapGrid roomGrid;
     roomGrid = loadMapFromFile(fileName, config);
-    return placeRoom(gameGrid, roomGrid, x, y, false);
+    return placeRoom(gameGrid, roomGrid, x, y, false, config.KTokenEnemy, enemies);
 }
 
 template<typename T>
@@ -80,7 +88,7 @@ bool isInVect(const vector<T>& vect, const T elem) {
 
 
 
-void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config) {
+void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config, vector<enemyInfo>& enemies) {
     // Select a random room for the desired direction
     vector<string> blacklistedMaps;
     char desiredDirection;
@@ -139,7 +147,7 @@ void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& p
         size_t x;
         tmpFile >> x;  // get door x position relative to room origin
         CPosition roomOrigin = {pos.first - y, pos.second - x};
-        if (loadAndPlace(gameGrid, fileName, roomOrigin.second, roomOrigin.first, config) == 0) break;
+        if (loadAndPlace(gameGrid, fileName, roomOrigin.second, roomOrigin.first, config, enemies) == 0) break;
         blacklistedMaps.push_back(fileName);  // avoid trying again to place down a map that didn't work once
     }
     // if couldn't place a room, place a wall instead lmao get rekt nob

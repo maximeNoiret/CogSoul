@@ -12,7 +12,7 @@
  * @param[in out] pos : a CPosition object containing an x and y value
  * @param[in] config : settings of the game
  */
-void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config);
+void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config, std::vector<enemyInfo>& enemies);
 
 /**
  * @brief moves every enemies. If one sees the player, it will move towards them, else it will move randomly.

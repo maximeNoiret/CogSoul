@@ -21,7 +21,7 @@ mapGrid loadMapFromFile(const std::string& fileName, const settings& config);
  * @param[in] isUniverse : boolean that indicates if the room being placed is the universe. Refer to generateRender in terminalManagement
  * @return 0 if everything went alright, 2 if the room is too tall (y), 3 if the room is too large (x), 4 if another room would overlap
  */
-int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse);
+int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const size_t& y, const bool& isUniverse, const char& enemyToken, std::vector<enemyInfo>& enemies);
 
 /**
  * @brief calls loadMapFromFile and placeRoom. Merely a QoL function.
@@ -31,7 +31,7 @@ int placeRoom(mapGrid& gameGrid, const mapGrid& roomGrid, const size_t& x, const
  * @param[in] y : y position of upper left of the room in the map
  * @return same as placeRoom: 0 if everything went alright, 2 if room is too tall (y), 3 if room is too large(x)
  */
-int loadAndPlace(mapGrid& gameGrid, const std::string& fileName, const size_t& x, const size_t y, const settings& config);
+int loadAndPlace(mapGrid& gameGrid, const std::string& fileName, const size_t& x, const size_t y, const settings& config, std::vector<enemyInfo>& enemies);
 
 /**
  * @brief generates a random room for a desired direction at a specific location
@@ -40,6 +40,6 @@ int loadAndPlace(mapGrid& gameGrid, const std::string& fileName, const size_t& x
  * @param[in] pos : position of the door that generates the room
  * @param[in] config : settings of the game
  */
-void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config);
+void generateRoom(mapGrid& gameGrid, const char& desiredDoor, const CPosition& pos, const settings& config, std::vector<enemyInfo>& enemies);
 
 #endif // MAPMANAGEMENT_H

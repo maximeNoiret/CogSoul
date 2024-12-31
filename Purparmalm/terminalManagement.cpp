@@ -80,19 +80,13 @@ void renderMainMenu(const short& select) {
 }
 
 
-unsigned short mainMenu() {
+unsigned short mainMenu(const settings& config) {
     unsigned short select = 0;
     for(char input = 0;input != 10;) {
         renderMainMenu(select);
         read(STDIN_FILENO, &input, 1);
-        switch (input) {
-        case 'z':
-            if (select > 0) --select;
-            break;
-        case 's':
-            if (select < 3) ++select;
-            break;
-        }
+        if (input == config.KMoveUp && select > 0) --select;
+        if (input == config.KMoveDown && select < 3) ++select;
     }
     return select;
 }
@@ -106,10 +100,11 @@ void helpMenu(const settings& config) {
          << "As an advanced robot in the year 2078, you can see through walls," << '\n'
          << "but only in a small radius and only see rooms you've been to and analyzed." << '\n' << '\n'
          << "Keybinds:" << '\n'
-         << '\t' << "Move up:    " << 'Z' << '\n'
-         << '\t' << "Move right: " << 'D' << '\n'
-         << '\t' << "Move down:  " << 'S' << '\n'
-         << '\t' << "Move left:  " << 'Q' << '\n' << '\n' << '\n';
+         << '\t' << "Move up    : " << toupper(config.KMoveUp) << '\n'
+         << '\t' << "Move right : " << toupper(config.KMoveRight) << '\n'
+         << '\t' << "Move down  : " << toupper(config.KMoveDown) << '\n'
+         << '\t' << "Move left  : " << toupper(config.KMoveLeft) << '\n'
+         << '\t' << "Inspect    : " << toupper(config.KInspect) << '\n' << '\n' << '\n';
     color(Colors.find("Green")->second);
     centerOut("Back");
     read(STDIN_FILENO, &input, 1);
@@ -142,9 +137,9 @@ string inputName() {
 }
 
 
-void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config) {
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config, vector<enemyInfo>& enemies) {
     mapGrid universe (gameMap.size()+ 2 * renderDist, mapLine (gameMap[0].size()+ 2 * renderDist, ' '));
-    placeRoom(universe, gameMap, renderDist, renderDist, true);
+    placeRoom(universe, gameMap, renderDist, renderDist, true, config.KTokenEnemy, enemies);
     // simple waste of ressources (16 bytes of memory(?)) to make my life easier
     CPosition upperLeft = {player.pos.first + renderDist * 0.5, player.pos.second};
     CPosition bottomRight = {player.pos.first + 2 * renderDist - renderDist * 0.5 + 1, player.pos.second + 2 * renderDist + 1};
@@ -209,7 +204,7 @@ void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const pl
 
 
 
-void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config) {
+void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config, vector<enemyInfo>& enemies) {
     clearScreen();
     cout.flush();
     milSleep(1000);
@@ -225,36 +220,36 @@ void introSequence(const mapGrid& gameMap, const playerInfo& player, const setti
     for (unsigned i = 2; i < 11; ++i) {
         milSleep(100);
         clearScreen();
-        generateRender(gameMap, i, player, config);
+        generateRender(gameMap, i, player, config, enemies);
     }
     Logs::setLog(2, "Visual Sensors... \033[32mOK\033[0m");
     Logs::setLog(3, "Motion Sensors...");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(1000 + rand() % 500);
     Logs::setLog(3, "Motion Sensors... \033[32mOK\033[0m");
     Logs::setLog(4, "AI...");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(3000 + rand() % 2000);
     Logs::setLog(4, "AI... \033[31mERROR\033[0m");
     Logs::setLog(5, "Attempting Troubleshoot...");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(2000 + rand() % 1000);
     Logs::setLog(5, "Attempting Troubleshoot... \033[31mERROR\033[0m");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(1000);
     Logs::setLog(6, "\033[33mBig boulette detected!\033[0m");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(1000);
     Logs::setLog(7, "Attempting Shutdown...");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
     milSleep(3000 + rand() % 2000);
     Logs::setLog(7, "Attempting Shutdown... \033[31mERROR\033[0m");
     clearScreen();
-    generateRender(gameMap, 10, player, config);
+    generateRender(gameMap, 10, player, config, enemies);
 }

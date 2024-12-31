@@ -23,7 +23,7 @@ void renderMainMenu();
  * @brief displays an interactive Main Menu with options to play or go into settings
  * @return the selected option (New Game, Settings, Exit)
  */
-unsigned short mainMenu();
+unsigned short mainMenu(const settings& config);
 
 
 void helpMenu(const settings& config);
@@ -47,9 +47,9 @@ std::string inputName();
  * @param[in] player : playerInfo object with information about the player (pos)
  * @param[in] config : settings of the game
  */
-void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config);
+void generateRender(const mapGrid& gameMap, const unsigned& renderDist, const playerInfo player, const settings& config, std::vector<enemyInfo>& enemies);
 
 
-void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config);
+void introSequence(const mapGrid& gameMap, const playerInfo& player, const settings& config, std::vector<enemyInfo>& enemies);
 
 #endif // TERMINALMANAGEMENT_H

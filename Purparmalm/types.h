@@ -62,11 +62,16 @@ struct settings {
     unsigned    KOutBox       = 3;  // 0=none,1=ascii,2=single,3=double
     bool        KSkipIntro    = false;
     std::string KSeed         = "";
+    char        KMoveUp       = 'z';
+    char        KMoveRight    = 'd';
+    char        KMoveDown     = 's';
+    char        KMoveLeft     = 'q';
+    char        KInspect      = 'e';
 };
 
 // using arrays to save on ressources (I think lmao)
 const std::array<char, 4> possibleMoves = {'z', 'q', 's', 'd'};
-const std::array<std::string, 3> roomsUp = {"testRoomUp.txt", "anotherRoom.txt", "roomTest.txt"};
+const std::array<std::string, 4> roomsUp = {"testRoomUp.txt", "anotherRoom.txt", "roomTest.txt", "testEnemyRoom.txt"};
 const std::array<std::string, 1> roomsRight = {"roomTest.txt"};
 const std::array<std::string, 0> roomsDown = {};
 const std::array<std::string, 2> roomsLeft = {"anotherRoom.txt", "roomTest.txt"};

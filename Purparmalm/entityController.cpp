@@ -6,46 +6,34 @@
 using namespace std;
 
 
-void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config) {
+void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings& config, vector<enemyInfo>& enemies) {
     char currPlayer = Mat[pos.first][pos.second];
     Mat[pos.first][pos.second] = config.KEmpty;
-    switch (tolower(move)) {
-    case 'z':
-        if (pos.first > 0 &&
-            Mat[pos.first - 1][pos.second] != '#' &&
-            Mat[pos.first - 1][pos.second] != config.KTokenEnemy) {
-            --pos.first;
-        }
-        break;
-    case 'q':
-        if (pos.second > 0 &&
-            Mat[pos.first][pos.second - 1] != '#' &&
-            Mat[pos.first][pos.second - 1] != config.KTokenEnemy) {
-            --pos.second;
-        }
-        break;
-    case 's':
-        if (pos.first < Mat.size()-1 &&
-            Mat[pos.first + 1][pos.second] != '#' &&
-            Mat[pos.first + 1][pos.second] != config.KTokenEnemy) {
-            ++pos.first;
-        }
-        break;
-    case 'd':
-        if (pos.second < Mat[pos.first].size()-1 &&
-            Mat[pos.first][pos.second + 1] != '#' &&
-            Mat[pos.first][pos.second + 1] != config.KTokenEnemy) {
-            ++pos.second;
-        }
-        break;
-    }
+
+    if (tolower(move) == config.KMoveUp &&
+        pos.first > 0 &&
+        Mat[pos.first - 1][pos.second] != '#' &&
+        Mat[pos.first - 1][pos.second] != config.KTokenEnemy) --pos.first;
+    else if (tolower(move) == config.KMoveRight &&
+             pos.second < Mat[pos.first].size()-1 &&
+             Mat[pos.first][pos.second + 1] != '#' &&
+             Mat[pos.first][pos.second + 1] != config.KTokenEnemy) ++pos.second;
+    else if (tolower(move) == config.KMoveDown &&
+             pos.first < Mat.size()-1 &&
+             Mat[pos.first + 1][pos.second] != '#' &&
+             Mat[pos.first + 1][pos.second] != config.KTokenEnemy) ++pos.first;
+    else if (tolower(move) == config.KMoveLeft &&
+             pos.second > 0 &&
+             Mat[pos.first][pos.second - 1] != '#' &&
+             Mat[pos.first][pos.second - 1] != config.KTokenEnemy) --pos.second;
+
     // if player moves on a door
     if (currPlayer == config.KTokenPlayer1 &&
         (Mat[pos.first][pos.second] == '1' ||
          Mat[pos.first][pos.second] == '2' ||
          Mat[pos.first][pos.second] == '3' ||
          Mat[pos.first][pos.second] == '4'))
-        generateRoom(Mat, Mat[pos.first][pos.second], pos, config);
+        generateRoom(Mat, Mat[pos.first][pos.second], pos, config, enemies);
     Mat[pos.first][pos.second] = currPlayer;
 } // moveToken
 
@@ -60,36 +48,36 @@ void moveEnemies(mapGrid& gameMap, playerInfo& player, vector<enemyInfo>& enemie
                 if (enemy.pos.second < player.pos.second) {
                     if (player.pos.first - enemy.pos.first < player.pos.second - enemy.pos.second &&
                         gameMap[enemy.pos.first][enemy.pos.second + 1] != '#')
-                        move = 'd';
+                        move = config.KMoveRight;
                     else
-                        move = 's';
+                        move = config.KMoveDown;
                 } else if (enemy.pos.second > player.pos.second) {
                     if (player.pos.first - enemy.pos.first < enemy.pos.second - player.pos.second &&
                         gameMap[enemy.pos.first][enemy.pos.second - 1] != '#')
-                        move= 'q';
+                        move= config.KMoveLeft;
                     else
-                        move = 's';
+                        move = config.KMoveDown;
                 } else
-                    move = 's';
+                    move = config.KMoveDown;
             } else if (enemy.pos.first > player.pos.first) {
                 if (enemy.pos.second < player.pos.second) {
                     if (enemy.pos.first - player.pos.first < player.pos.second - enemy.pos.second &&
                         gameMap[enemy.pos.first][enemy.pos.second + 1] != '#')
-                        move = 'd';
+                        move = config.KMoveRight;
                     else
-                        move = 'z';
+                        move = config.KMoveUp;
                 } else if (enemy.pos.second > player.pos.second) {
                     if (enemy.pos.first - player.pos.first < enemy.pos.second - player.pos.second &&
                         gameMap[enemy.pos.first][enemy.pos.second - 1] != '#')
-                        move= 'q';
+                        move= config.KMoveLeft;
                     else
-                        move = 'z';
+                        move = config.KMoveUp;
                 } else
-                    move = 'z';
-            } else if (enemy.pos.second < player.pos.second) move = 'd';
-            else if (enemy.pos.second > player.pos.second) move = 'q';
+                    move = config.KMoveUp;
+            } else if (enemy.pos.second < player.pos.second) move = config.KMoveRight;
+            else if (enemy.pos.second > player.pos.second) move = config.KMoveLeft;
         }else move = possibleMoves[rand() % 5];
-        moveToken(gameMap, move, enemy.pos, config);
+        moveToken(gameMap, move, enemy.pos, config, enemies);
         if (player.pos == enemy.pos)
             player.dead = true;
     }
@@ -112,7 +100,7 @@ bool isWallBetween(const mapGrid& Mat, const CPosition& pos1, const CPosition& p
 bool isPlayerSeen(const mapGrid& Mat, vector<enemyInfo>& enemies, const playerInfo& player, const settings& config) {
     unsigned radius = 2;
     mapGrid universe (Mat.size()+ 2 * radius, mapLine (Mat[0].size()+ 2 * radius, ' '));
-    placeRoom(universe, Mat, radius, radius, true);
+    placeRoom(universe, Mat, radius, radius, true, config.KTokenEnemy, enemies);
     bool found = false;
     for (vector<enemyInfo>::iterator enemyIter = enemies.begin(); enemyIter < enemies.end() && !found; ++enemyIter) {
         const CPosition upperLeft = {enemyIter->pos.first, enemyIter->pos.second};
