@@ -19,16 +19,11 @@ int mainGame(const settings& config)
 
     bool playerWon = false;
 
-    playerInfo player = {inputName(), CPosition (25, 40), false, false};
+    playerInfo player = {inputName(), CPosition (gameMap.size() * 0.5, gameMap[0].size() * 0.5), false, false};
     vector<enemyInfo> enemies;
-    // enemies[0] = {CPosition (14, 30), false};
-    // enemies[1] = {CPosition (14, 31), false};
-    // enemies[2] = {CPosition (17, 32), false};
     loadAndPlace(gameMap, "rooms/testProceduralDoors.txt", 35, 20, config, enemies);
 
     gameMap[player.pos.first][player.pos.second] = config.KTokenPlayer1;  // set player in mat
-    // for (const enemyInfo& enemy : enemies)
-    //     gameMap[enemy.pos.first][enemy.pos.second] = config.KTokenEnemy;  // set each enemy in mat
 
     // intro sequence
     Logs::setLog(0, "LOGS_2078-04-29_23-12-09.2408751");
@@ -60,7 +55,7 @@ int mainGame(const settings& config)
 
     if (player.dead) {
         clearScreen();
-        cout << "A scientist found you!" << endl << "GAME OVER" << endl << endl;
+        cout << "A scientist caught you!" << endl << "GAME OVER" << endl << endl;
     }
     return 0;
 }

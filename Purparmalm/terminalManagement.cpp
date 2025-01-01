@@ -96,15 +96,19 @@ void helpMenu(const settings& config) {
     clearScreen();
     char input;
     cout << "The objective of the game is to escape from a research facility," << '\n'
-         << "avoiding detection from researchers and finding keys to open doors." << '\n'
+         << "  avoiding detection from researchers and finding keys to open doors." << '\n'
          << "As an advanced robot in the year 2078, you can see through walls," << '\n'
-         << "but only in a small radius and only see rooms you've been to and analyzed." << '\n' << '\n'
+         << "  but only in a small radius and only rooms you've been to and analyzed." << '\n'
+         << "Brainrot media and generative AIs having aided humans for generations now," << '\n'
+         << "  the researchers can only pay attentions to anything closer than 2 meters"  << '\n'
+         << "  and will quickly forget anything not directly in front of them." << '\n' << '\n'
          << "Keybinds:" << '\n'
-         << '\t' << "Move up    : " << toupper(config.KMoveUp) << '\n'
-         << '\t' << "Move right : " << toupper(config.KMoveRight) << '\n'
-         << '\t' << "Move down  : " << toupper(config.KMoveDown) << '\n'
-         << '\t' << "Move left  : " << toupper(config.KMoveLeft) << '\n'
-         << '\t' << "Inspect    : " << toupper(config.KInspect) << '\n' << '\n' << '\n';
+         << '\t' << "Move up    : " << config.KMoveUp << '\n'
+         << '\t' << "Move right : " << config.KMoveRight << '\n'
+         << '\t' << "Move down  : " << config.KMoveDown << '\n'
+         << '\t' << "Move left  : " << config.KMoveLeft << '\n'
+         << '\t' << "Inspect    : " << config.KInspect << '\n' << '\n' << '\n'
+         << "To inspect something, stand next to it. It'll probably work. (I hope)" << '\n' << '\n';
     color(Colors.find("Green")->second);
     centerOut("Back");
     read(STDIN_FILENO, &input, 1);

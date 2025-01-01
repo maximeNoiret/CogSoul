@@ -26,6 +26,21 @@ void moveToken (mapGrid & Mat, const char& move, CPosition& pos, const settings&
              pos.second > 0 &&
              Mat[pos.first][pos.second - 1] != '#' &&
              Mat[pos.first][pos.second - 1] != config.KTokenEnemy) --pos.second;
+    // inspect
+    else if (tolower(move) == config.KInspect) {
+        // check for inspectable elements in neighboring tiles
+        // if all 4 neighboring tiles are walls or empty, idle inspection
+        if ((Mat[pos.first - 1][pos.second] == '#' || Mat[pos.first - 1][pos.second] == config.KEmpty) &&
+            (Mat[pos.first][pos.second + 1] == '#' || Mat[pos.first][pos.second + 1] == config.KEmpty) &&
+            (Mat[pos.first + 1][pos.second] == '#' || Mat[pos.first + 1][pos.second] == config.KEmpty) &&
+            (Mat[pos.first][pos.second - 1] == '#' || Mat[pos.first][pos.second - 1] == config.KEmpty))
+            Logs::addLog(idleInspects[rand() % idleInspects.size()]);
+        else if (Mat[pos.first - 1][pos.second] == '1' ||
+                 Mat[pos.first][pos.second + 1] == '2' ||
+                 Mat[pos.first + 1][pos.second] == '3' ||
+                 Mat[pos.first][pos.second - 1] == '4')
+            Logs::addLog("A door stand next to you.");
+    }
 
     // if player moves on a door
     if (currPlayer == config.KTokenPlayer1 &&

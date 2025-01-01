@@ -9,11 +9,20 @@ namespace Logs {
     vector<string> logs(8);
 
     void addLog(const string& log){
-        // Slide all elem back
-        for (size_t i = 0; i < logs.size()-1; ++i)
-            logs[i] = logs[i+1];
-        // Add log at the end
-        logs[logs.size()-1] = log;
+
+        size_t separator = log.find('\\');
+        if (separator == log.npos) {
+            // Slide all elem back
+            for (size_t i = 0; i < logs.size()-1; ++i)
+                logs[i] = logs[i+1];
+            // Add log at the end
+            logs[logs.size()-1] = log;
+        }
+        else {
+            // weird ass recursive shit?
+            addLog(log.substr(0, separator));
+            addLog(log.substr(separator+1));
+        }
 
         // This avoids push_back and erase, which fuck up the memory I think? lmao idk
     }
