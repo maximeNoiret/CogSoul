@@ -4,9 +4,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 const char kTokenPlayer1 = 'X';
 const char kTokenPlayer2 = 'O';
-const char kEmpty        = '_';
+const char KEmpty        = '_';
 
 using namespace std;
 //COULEURS texte
@@ -28,8 +29,8 @@ const unsigned BackKBleu    (44);
 const unsigned BackKMAgenta (45);
 const unsigned BackKCyan    (46);
 
-typedef vector <char> CVLine; // un type représentant une ligne de la grille
-typedef vector <CVLine> CMatrix; // un type représentant la grille //vector<vector<char>>
+typedef vector <char> mapLine; // un type représentant une ligne de la grille
+typedef vector <mapLine> mapGrid; // un type représentant la grille //vector<vector<char>>
 typedef pair   <unsigned, unsigned> CPosition; // un type représentant une coordonnée dans la grille
 
 
@@ -87,7 +88,30 @@ void background (const unsigned & back)
     cout << "\033[7;" << back <<"m";
 }
 
-void showMatrix (const CMatrix & mat, const short & couleurPlato)
+void loadMapFromFile(mapGrid& roomGrid, const string& fileName) {
+    ifstream mapFile (fileName);
+    if (!mapFile.good()) {
+        cerr << "Couldn't access map file! (" << fileName << ")" << endl;
+        exit(2);
+    }
+    size_t height;
+    mapFile >> height;
+    size_t width;
+    mapFile >> width;
+    mapFile.get();  // gets rid of newline
+    roomGrid.assign(height, mapLine (width, KEmpty));
+    string input;
+    for (mapGrid::iterator iter = roomGrid.begin(); iter != roomGrid.end() && getline(mapFile, input); ++iter) {
+        size_t tmpIndex = 0;
+        for (mapLine::iterator subIter = iter->begin(); subIter != iter->end() && tmpIndex < input.size(); ++subIter) {
+            if (input[tmpIndex] == '\n') continue;
+            *subIter = (input[tmpIndex] == ' ' ? KEmpty : input[tmpIndex]);
+            ++tmpIndex;
+        }
+    }
+}
+
+void showMatrix (const mapGrid & mat, const short & couleurPlato)
 {
     clearScreen();
     couleur(KReset);
@@ -95,10 +119,10 @@ void showMatrix (const CMatrix & mat, const short & couleurPlato)
     {
         couleur(couleurPlato);
         cout << "|" ;
-        couleur(kEmpty);
+        couleur(KEmpty);
         for (size_t y (0); y < size(mat[0]); ++y)
         {
-            if (mat[i][y] == kEmpty)
+            if (mat[i][y] == KEmpty)
             {
                 couleur(couleurPlato);
                 cout << mat[i][y];
@@ -118,18 +142,60 @@ void showMatrix (const CMatrix & mat, const short & couleurPlato)
             }
         couleur(couleurPlato);
         cout << "|" ;
-        couleur(kEmpty);
+        couleur(KEmpty);
 
 
         }
         cout << endl;
     }
 }
-//CMatrix test (20, CVline(20, 'c'));
+//mapGrid test (20, mapLine(20, 'c'));
 
-void initMat (CMatrix & Mat, unsigned nbLine, unsigned nbColumn, CPosition & posPlayer1, CPosition & posPlayer2)
+size_t showCountMatrix(const mapGrid & mat, const short & couleurPlato, size_t & nombercase)
 {
-    Mat.assign(nbLine, CVLine (nbColumn, kEmpty));
+    clearScreen();
+    couleur(KReset);
+    for (size_t i (0); i < size(mat); ++i)
+    {
+        couleur(couleurPlato);
+        cout << "|" ;
+        couleur(KEmpty);
+        for (size_t y (0); y < size(mat[0]); ++y)
+        {
+            if (mat[i][y] == KEmpty)
+            {
+                couleur(couleurPlato);
+                cout << mat[i][y];
+            }
+
+            else if (mat[i][y] == kTokenPlayer1)
+            {
+                couleur(KJaune);
+                cout << kTokenPlayer1;
+                couleur(KReset);
+                nombercase = nombercase + 1;
+            }
+            else
+            {
+                continue;
+            }
+            couleur(couleurPlato);
+            cout << "|" ;
+            couleur(KEmpty);
+
+
+        }
+        cout << endl;
+    }
+    return nombercase;
+}
+
+
+
+
+void initMat (mapGrid & Mat, unsigned nbLine, unsigned nbColumn, CPosition & posPlayer1, CPosition & posPlayer2)
+{
+    Mat.assign(nbLine, mapLine (nbColumn, KEmpty));
     posPlayer1  = {0 , 0} ;
     posPlayer2 = {nbLine-1, nbColumn-1} ;
     Mat [0][0] = kTokenPlayer1;
@@ -137,10 +203,10 @@ void initMat (CMatrix & Mat, unsigned nbLine, unsigned nbColumn, CPosition & pos
 }
 
 //Chaque joueur joue à tour de rôle, et ne peut faire qu’un unique déplacement, et d’une seule case. Les touches valides de déplacement sont ‘A’ (haut gauche), ‘Z’ (haut), ‘E’ (haut droit), ‘Q’, ‘D’, ‘W’, ‘X, et ‘C’ (mais elles peuvent être changées).
-void moveToken (CMatrix & Mat, char move, CPosition  & pos)
+void moveToken (mapGrid & Mat, char move, CPosition  & pos)
 {
     char joueur = Mat [pos.first][pos.second];
-    Mat [pos.first][pos.second] = kEmpty;
+    Mat [pos.first][pos.second] = KEmpty;
     switch (move)
     {
     case 'a' :
@@ -192,11 +258,37 @@ void moveToken (CMatrix & Mat, char move, CPosition  & pos)
     Mat [pos.first][pos.second] = joueur;
 }
 
-
-void moveTokenChevalVertical (CMatrix & Mat, char move, CPosition  & pos)
+void moveTokenCouleur (mapGrid & Mat, char move, CPosition  & pos)
 {
     char joueur = Mat [pos.first][pos.second];
-    Mat [pos.first][pos.second] = kEmpty;
+    Mat [pos.first][pos.second] = 'X';
+    switch (move)
+    {
+    case 'z' :
+        if (pos.first > 0 && Mat[pos.first - 1][pos.second] != '#')
+            pos.first -= 1;
+        break;
+    case 'q' :
+        if (pos.second > 0 && Mat[pos.first][pos.second - 1] != '#')
+            pos.second -= 1;
+        break;
+    case 'd' :
+        if (pos.second < Mat[pos.first].size()-1 && Mat[pos.first][pos.second + 1] != '#')
+            pos.second += 1;
+        break;
+    case 'x':
+        if (pos.first < Mat.size()-1 && Mat[pos.first + 1][pos.second] != '#')
+            pos.first += 1;
+        break;
+    }
+
+    Mat [pos.first][pos.second] = joueur;
+}
+
+void moveTokenChevalVertical (mapGrid & Mat, char move, CPosition  & pos)
+{
+    char joueur = Mat [pos.first][pos.second];
+    Mat [pos.first][pos.second] = KEmpty;
     switch (move)
     {
     case 'a' :
@@ -232,10 +324,10 @@ void moveTokenChevalVertical (CMatrix & Mat, char move, CPosition  & pos)
     Mat [pos.first][pos.second] = joueur;
 }
 
-void moveTokenChevalHorizontal (CMatrix & Mat, char move, CPosition  & pos)
+void moveTokenChevalHorizontal (mapGrid & Mat, char move, CPosition  & pos)
 {
     char joueur = Mat [pos.first][pos.second];
-    Mat [pos.first][pos.second] = kEmpty;
+    Mat [pos.first][pos.second] = KEmpty;
     switch (move)
     {
     case 'a' :
@@ -271,16 +363,46 @@ void moveTokenChevalHorizontal (CMatrix & Mat, char move, CPosition  & pos)
     Mat [pos.first][pos.second] = joueur;
 }
 
-void moveTokenChevalHV(CMatrix & Mat, char move)
+// void moveTokenChevalHV(mapGrid & Mat, char move)
+// {
+//     char moveHorV;
+//     if (move == 'l')
+//     {
+//         cout << "Voulez vous jouer en horizontal ou vertical ? Les touches seront a,e,w, et c pour se déplacer !" << endl;
+//         cin >> moveHorV;
+//     }
+
+
+// }
+
+
+// void moveTokenCouleur(mapGrid & Mat, char move)
+// {
+
+// }
+
+bool isgoodPlaced(mapGrid & Mat, char & move, CPosition  & pos)
 {
-    char moveHorV;
-    if (move == 'l')
+    switch (move)
     {
-        cout << "Voulez vous jouer en horizontal ou vertical ? Les touches seront a,e,w, et c pour se déplacer !" << endl;
-        cin >> moveHorV;
+    case 'z' :
+        if (pos.first > 0 && Mat[pos.first - 1][pos.second] != '#')
+            return true;
+        break;
+    case 'q' :
+        if (pos.second > 0 && Mat[pos.first][pos.second - 1] != '#')
+            return true;
+        break;
+    case 'd' :
+        if (pos.second < Mat[pos.first].size()-1 && Mat[pos.first][pos.second + 1] != '#')
+            return true;
+        break;
+    case 'x':
+        if (pos.first < Mat.size()-1 && Mat[pos.first + 1][pos.second] != '#')
+            return true;
+        break;
     }
-
-
+    return false;
 }
 
 int ppal ()
@@ -288,7 +410,9 @@ int ppal ()
     // probs:
     //      -sortie de plateau [OK]
     //      -plusieurs move en même temps [OK]
-    CMatrix Mat;
+    mapGrid Mat;
+    mapGrid Mat2;
+    loadMapFromFile(Mat2, "../../map2.txt");
     unsigned ligne;
     unsigned colonne;
     unsigned toursMax (0);
@@ -318,6 +442,7 @@ int ppal ()
     cout << "Input des règles ici" << endl
          << "Quel mode de jeu voulez vous ?" << endl
          << " Cavalier : entrez 'c' " << endl
+         << " Cavalier : entrez 'm' " << endl
          << " Jeu normal : entrez 'n'" << endl << endl
          << "->  ";
     cin >>TypeDeJeu;
@@ -403,6 +528,24 @@ int ppal ()
             couleur(KReset);
             nombreTours += 1;
         }
+    else if(TypeDeJeu == 'm')
+    {
+        showMatrix(Mat2,Couleur);
+        size_t nombercase (0);
+        for(size_t i (nombreTours);i < toursMax; ++i)
+        {
+            nombercase = 0;
+            read (STDIN_FILENO, &Move, 1);
+            while(isgoodPlaced(Mat, Move, posPlayer1))
+            {
+                moveTokenCouleur(Mat, Move,posPlayer1);
+            }
+            nombercase = showCountMatrix(Mat, Couleur, nombercase);
+
+            cout << endl << endl << "tours restants : " << toursMax-i << endl;
+            cout << nombercase << endl;
+        }
+    }
 
     if ( nombreTours == toursMax)
     {
@@ -432,7 +575,11 @@ int ppal ()
 int main()
 {
     return ppal();
-    // CMatrix Mat;
+
+
+
+
+    // mapGrid Mat;
     // CPosition posPlayer1;
     // CPosition posPlayer2;
     // initMat(Mat, 10, 10, posPlayer1, posPlayer2);
