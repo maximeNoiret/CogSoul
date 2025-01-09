@@ -252,6 +252,7 @@ DIST          = /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -475,6 +476,7 @@ Makefile: ../../paint-the-town.pro /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/linux-g++/qm
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -688,6 +690,7 @@ Makefile: ../../paint-the-town.pro /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/linux-g++/qm
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt-6.7/6.7.1/gcc_64/mkspecs/features/default_pre.prf:
