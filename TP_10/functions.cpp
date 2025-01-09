@@ -1,55 +1,14 @@
-#include <iostream>
-#include <vector>
-#include <termios.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fstream>
-const char kTokenPlayer1 = 'X';
-const char kTokenPlayer2 = 'O';
-const char KEmpty        = '_';
+#include "functions.h"
 
-using namespace std;
-//COULEURS texte
-const unsigned KReset   (0);
-const unsigned KNoir    (30);
-const unsigned KRouge   (31);
-const unsigned KVert    (32);
-const unsigned KJaune   (33);
-const unsigned KBleu    (34);
-const unsigned KMAgenta (35);
-const unsigned KCyan    (36);
-//couleur background
-const unsigned BackKReset   (0);
-const unsigned BackKNoir    (40);
-const unsigned BackKRouge   (41);
-const unsigned BackKVert    (42);
-const unsigned BackKJaune   (43);
-const unsigned BackKBleu    (44);
-const unsigned BackKMAgenta (45);
-const unsigned BackKCyan    (46);
-
-typedef vector <char> mapLine; // un type représentant une ligne de la grille
-typedef vector <mapLine> mapGrid; // un type représentant la grille //vector<vector<char>>
-typedef pair   <unsigned, unsigned> CPosition; // un type représentant une coordonnée dans la grille
+functions::functions() {}
 
 
-
-
-
-
-/* Use this variable to remember original terminal attributes. */
-
-struct termios saved_attributes;
-
-void
-reset_input_mode (void)
+void reset_input_mode (void)
 {
     tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
 }
 
-void
-set_input_mode (void)
+void set_input_mode (void)
 {
     struct termios tattr;
     char *name;
@@ -134,22 +93,21 @@ void showMatrix (const mapGrid & mat, const short & couleurPlato)
                 cout << kTokenPlayer1;
                 couleur(KReset);
             }
-             else
+            else
             {
                 couleur(KVert);
                 cout << kTokenPlayer2;
                 couleur(KReset);
             }
-        couleur(couleurPlato);
-        cout << "|" ;
-        couleur(KEmpty);
+            couleur(couleurPlato);
+            cout << "|" ;
+            couleur(KEmpty);
 
 
         }
         cout << endl;
     }
 }
-//mapGrid test (20, mapLine(20, 'c'));
 
 size_t showCountMatrix(const mapGrid & mat, const short & couleurPlato, size_t & nombercase)
 {
@@ -202,7 +160,6 @@ void initMat (mapGrid & Mat, unsigned nbLine, unsigned nbColumn, CPosition & pos
     Mat [nbLine-1][nbColumn-1] = kTokenPlayer2;
 }
 
-//Chaque joueur joue à tour de rôle, et ne peut faire qu’un unique déplacement, et d’une seule case. Les touches valides de déplacement sont ‘A’ (haut gauche), ‘Z’ (haut), ‘E’ (haut droit), ‘Q’, ‘D’, ‘W’, ‘X, et ‘C’ (mais elles peuvent être changées).
 void moveToken (mapGrid & Mat, char move, CPosition  & pos)
 {
     char joueur = Mat [pos.first][pos.second];
@@ -244,7 +201,7 @@ void moveToken (mapGrid & Mat, char move, CPosition  & pos)
         break;
     case 'x':
         if (pos.first < size(Mat)-1)
-        pos.first += 1;
+            pos.first += 1;
         break;
     case 'c':
         if ((pos.second < size(Mat)-1) && (pos.first < size(Mat[0])-1))
@@ -363,23 +320,6 @@ void moveTokenChevalHorizontal (mapGrid & Mat, char move, CPosition  & pos)
     Mat [pos.first][pos.second] = joueur;
 }
 
-// void moveTokenChevalHV(mapGrid & Mat, char move)
-// {
-//     char moveHorV;
-//     if (move == 'l')
-//     {
-//         cout << "Voulez vous jouer en horizontal ou vertical ? Les touches seront a,e,w, et c pour se déplacer !" << endl;
-//         cin >> moveHorV;
-//     }
-
-
-// }
-
-
-// void moveTokenCouleur(mapGrid & Mat, char move)
-// {
-
-// }
 
 bool isgoodPlaced(mapGrid & Mat, char & move, CPosition  & pos)
 {
@@ -404,175 +344,3 @@ bool isgoodPlaced(mapGrid & Mat, char & move, CPosition  & pos)
     }
     return false;
 }
-
-int ppal ()
-{
-    // probs:
-    //      -sortie de plateau [OK]
-    //      -plusieurs move en même temps [OK]
-    mapGrid Mat;
-    mapGrid Mat2;
-    loadMapFromFile(Mat2, "../../map2.txt");
-    unsigned ligne;
-    unsigned colonne;
-    unsigned toursMax (0);
-    char Move;
-    char MoveHorV;
-    short Couleur;
-    char TypeDeJeu;
-    size_t nombreTours (0);
-    CPosition posPlayer1;
-    CPosition posPlayer2;
-    cout << "combien de lignes ? " << endl << "->  ";
-    cin >> ligne;
-    cout << "combien de colonnes ? " << endl << "->  ";
-    cin >> colonne;
-    cout << "combien de tours max ? " << endl << "->  ";
-    cin >> toursMax;
-    cout << "Quelle couleur pour le plateau ? " << endl
-    << "| Noir : 30 " << endl
-    <<  "| Rouge : 31" << endl
-    << "| Vert : 32 "<< endl
-    <<"| Jaune : 33 "<< endl
-    <<"| Bleu : 34 "<< endl
-    <<"| Magenta : 35 "
-    << endl <<"| Cyan : 36 "
-    << endl << endl << "->  ";
-    cin >> Couleur;
-    cout << "Input des règles ici" << endl
-         << "Quel mode de jeu voulez vous ?" << endl
-         << " Cavalier : entrez 'c' " << endl
-         << " Jeu normal : entrez 'n'" << endl << endl
-         << "->  ";
-    cin >>TypeDeJeu;
-    initMat(Mat,ligne,colonne,posPlayer1,posPlayer2);
-    showMatrix(Mat, Couleur);
-    set_input_mode ();
-    if (TypeDeJeu == 'n')
-
-        while (nombreTours < toursMax && posPlayer1 != posPlayer2)
-        {
-
-            if (nombreTours%2 == 0)
-            {
-                couleur(KJaune);
-                cout << "Tour du joueur 1" << endl;
-                couleur(KReset);
-                read (STDIN_FILENO, &Move, 1);
-                moveToken(Mat, Move,posPlayer1);
-
-            }
-            else
-            {
-                couleur(KVert);
-                cout << "Tour du joueur 2" <<endl;
-                couleur(KReset);
-                read (STDIN_FILENO, &Move, 1);
-                moveToken(Mat, Move,posPlayer2);
-            }
-
-            showMatrix(Mat, Couleur);
-            cout << endl << endl << "tours restants : " << toursMax-(nombreTours+1) << endl;
-            nombreTours += 1;
-        }
-    else
-
-        while (nombreTours < toursMax && posPlayer1 != posPlayer2)
-        {
-
-            if (nombreTours%2 == 0)
-            {
-                couleur(KJaune);
-                cout << "Tour du joueur 1" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'v' " << endl << "Pour horizontal : Entrez 'h' " << endl ;
-                couleur(KReset);
-                read (STDIN_FILENO, &MoveHorV, 1);
-                showMatrix(Mat, Couleur);
-                couleur(Couleur);
-                cout << endl << endl <<  "tours restants : " << toursMax-(nombreTours+1) << endl;
-                couleur(KReset);
-                couleur(KJaune);
-                cout << "Tour du joueur 1" << endl << endl;
-                couleur(KReset);
-                read (STDIN_FILENO, &Move, 1);
-                if (MoveHorV == 'v')
-                    moveTokenChevalVertical(Mat, Move, posPlayer1);
-                else
-                    moveTokenChevalHorizontal(Mat, Move, posPlayer1);
-                couleur(KReset);
-            }
-            else
-            {
-                couleur(KVert);
-                cout << "Tour du joueur 2" << endl <<endl << "Voulez-vous jouer en horizontal ou vertical ?" << endl << "Pour vertical : Entrez 'v' " << endl << "Pour horizontal : Entrez 'h' " << endl ;
-                couleur(KReset);
-                read (STDIN_FILENO, &MoveHorV, 1);
-                showMatrix(Mat, Couleur);
-                couleur(Couleur);
-                cout << endl << endl << "tours restants : " << toursMax-(nombreTours+1) << endl;
-                couleur(KReset);
-                couleur(KVert);
-                cout << "Tour du joueur 2" << endl << endl;
-                couleur(KReset);
-                read (STDIN_FILENO, &Move, 1);
-                if (MoveHorV == 'v')
-                    moveTokenChevalVertical(Mat, Move, posPlayer2);
-                else
-                    moveTokenChevalHorizontal(Mat, Move, posPlayer2);
-                couleur(KReset);
-            }
-
-            showMatrix(Mat, Couleur);
-            couleur(Couleur);
-            cout << endl << endl << "tours restants : " << toursMax-(nombreTours+1) << endl;
-            couleur(KReset);
-            nombreTours += 1;
-        }
-
-    if ( nombreTours == toursMax)
-    {
-        couleur(Couleur);
-        cout << endl << endl << "egalité, plus de tours disponibles" <<endl <<endl;
-        couleur(KReset);
-    }
-    else if ( nombreTours%2 == 0)
-    {
-        couleur(KVert);
-        cout << endl << endl << "Le joueur 2 a gagné" <<endl <<endl;
-        couleur(KReset);
-    }
-    else
-    {
-        couleur(KJaune);
-        cout << endl << endl<< "Le joueur 1 a gagné" <<endl <<endl;
-        couleur(KReset);
-    }
-
-    return 0;
-
-}
-
-
-
-int main()
-{
-    return ppal();
-
-
-
-
-    // mapGrid Mat;
-    // CPosition posPlayer1;
-    // CPosition posPlayer2;
-    // initMat(Mat, 10, 10, posPlayer1, posPlayer2);
-    //CODEU
-    // cout << "Hello World!" << endl;
-    // clearScreen();
-    // background(BackKRouge);
-    // cout << "TETETTEFDSEFICSNFCS" << endl;
-    //initMat();
-    // return 0;
-}
-
-
-
-
