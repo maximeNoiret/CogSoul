@@ -235,49 +235,77 @@ bool isgoodPlaced(mapGrid & Mat, char & move, CPosition  & pos)
     return false;
 }
 
+size_t countCasesVides(mapGrid & mat, size_t nbrVides)
+{
+    nbrVides = 0;
+    for (size_t i (0); i < size(mat); ++i)
+    {
+        for (size_t y (0); y < size(mat[0]); ++y)
+        {
+            if (mat[i][y] == KEmpty)
+            {
+                nbrVides += 1;
+            }
+            else if (mat[i][y] == kTokenPlayer1)
+            {
+                continue;
+            }
+
+        }
+        cout << endl;
+    }
+    return nbrVides;
+}
 
 using namespace std;
 
 int main()
 {
+    size_t nbrVides;
     char Move;
     mapGrid Mat;
     CPosition posPlayer = {3, 4};
     size_t nombercase (0);
     size_t nombreTours (0);
     short Couleur (36);
-    loadMapFromFile(Mat, "../../map2.txt");
-    Mat[posPlayer.first][posPlayer.second] = kTokenPlayer1;
+    size_t numeroMap (1);
+    string cheminMap ("../../map" + to_string(numeroMap) + ".txt") ;
+    char resultat;
     unsigned toursMax (200);
-    // printGrid(Mat);
 
 
-    // set_input_mode();
-    // while(true)
-    // {
-    //     clearScreen();
-    //     //printGrid(Mat);
-    //     showCountMatrix(Mat, Couleur,nombercase );
-    //     read (STDIN_FILENO, &Move, 1);
-    //     moveToken(Mat, Move,posPlayer);
-    //     //printGrid(Mat);
-    //     showCountMatrix(Mat, Couleur,nombercase );
-    // }
-    // cout << "test pas boucle";
-    showCountMatrix(Mat,Couleur, nombercase);
-    for(size_t i (nombreTours);i < toursMax; ++i)
+
+    for(size_t y (numeroMap) ; y < 10 ; ++y)
     {
-        nombercase = 0;
-        read (STDIN_FILENO, &Move, 1);
-        while(isgoodPlaced(Mat, Move, posPlayer))
+        cheminMap = ("../../map" + to_string(y) + ".txt") ;
+        clearScreen();
+        loadMapFromFile(Mat, cheminMap);
+        Mat[posPlayer.first][posPlayer.second] = kTokenPlayer1;
+        showCountMatrix(Mat, Couleur, nombercase);
+        for(size_t i (nombreTours); i < toursMax; ++i)
         {
-            moveToken(Mat, Move,posPlayer);
-        }
-        nombercase = showCountMatrix(Mat, Couleur, nombercase);
+            nombercase = 0;
+            read (STDIN_FILENO, &Move, 1);
+            while(isgoodPlaced(Mat, Move, posPlayer))
+            {
+                moveToken(Mat, Move,posPlayer);
+            }
+            nombercase = showCountMatrix(Mat, Couleur, nombercase);
+            nbrVides = countCasesVides(Mat, nbrVides);
 
-        cout << endl << endl << "tours restants : " << toursMax-i << endl;
-        cout << nombercase << endl;
+            cout << endl << endl << "tours restants : " << toursMax-i << endl;
+            cout << endl << "cases vides : " << nbrVides << endl;
+            cout << endl << "level :" << y << endl;
+            cout << nombercase << endl;
+            if (nbrVides == 0)
+                i = toursMax-1;
+        }
+
     }
+
+    cout  << endl << "BRAVO, VOUS AVEZ GAGNÉ" << endl;
+    cout << endl << endl <<"APPUYEZ SUR ENTRÉE POUR SORTIR DU JEU" << endl;
+    cin >> resultat;
 
 
 
