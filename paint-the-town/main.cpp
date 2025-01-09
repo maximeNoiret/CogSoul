@@ -29,9 +29,9 @@ const unsigned BackKBleu    (44);
 const unsigned BackKMAgenta (45);
 const unsigned BackKCyan    (46);
 
-typedef vector <char> mapLine; // un type représentant une ligne de la grille
-typedef vector <mapLine> mapGrid; // un type représentant la grille //vector<vector<char>>
-typedef pair   <unsigned, unsigned> CPosition; // un type représentant une coordonnée dans la grille
+typedef vector <char> mapLine;
+typedef vector <mapLine> mapGrid;
+typedef pair   <unsigned, unsigned> CPosition;
 
 struct termios saved_attributes;
 
@@ -266,23 +266,25 @@ int main()
     mapGrid Mat;
     CPosition posPlayer = {3, 4};
     size_t nombercase (0);
-    size_t nombreTours (0);
+    size_t nomberTours (0);
     short Couleur (36);
-    size_t numeroMap (1);
-    string cheminMap ("../../map" + to_string(numeroMap) + ".txt") ;
+    size_t nbrMap (1);
+    string wayMap ("../../map" + to_string(nbrMap) + ".txt") ;
     char resultat;
-    unsigned toursMax (200);
+    unsigned maxTurn (200);
 
 
 
-    for(size_t y (numeroMap) ; y < 10 ; ++y)
+    for(size_t y (nbrMap) ; y < 10 ; ++y)
     {
-        cheminMap = ("../../map" + to_string(y) + ".txt") ;
+        wayMap = ("../../map" + to_string(y) + ".txt") ;
         clearScreen();
-        loadMapFromFile(Mat, cheminMap);
+        loadMapFromFile(Mat, wayMap);
+        posPlayer.first = 5;
+        posPlayer.second = 4;
         Mat[posPlayer.first][posPlayer.second] = kTokenPlayer1;
         showCountMatrix(Mat, Couleur, nombercase);
-        for(size_t i (nombreTours); i < toursMax; ++i)
+        for(size_t i (nomberTours); i < maxTurn; ++i)
         {
             nombercase = 0;
             read (STDIN_FILENO, &Move, 1);
@@ -293,18 +295,17 @@ int main()
             nombercase = showCountMatrix(Mat, Couleur, nombercase);
             nbrVides = countCasesVides(Mat, nbrVides);
 
-            cout << endl << endl << "tours restants : " << toursMax-i << endl;
-            cout << endl << "cases vides : " << nbrVides << endl;
+            cout << endl << endl << "Remaining Turns : " << maxTurn-i << endl;
+            cout << endl << "empty cases left : : " << nbrVides << endl;
             cout << endl << "level :" << y << endl;
             cout << nombercase << endl;
             if (nbrVides == 0)
-                i = toursMax-1;
+                i = maxTurn-1;
         }
 
     }
 
-    cout  << endl << "BRAVO, VOUS AVEZ GAGNÉ" << endl;
-    cout << endl << endl <<"APPUYEZ SUR ENTRÉE POUR SORTIR DU JEU" << endl;
+    cout  << endl << "GG YOU WON" << endl;
     cin >> resultat;
 
 
