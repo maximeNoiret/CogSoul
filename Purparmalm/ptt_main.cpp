@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ptt_functions.h"
+#include "ptt_main.h"
 
 
 using namespace std;
@@ -18,7 +19,7 @@ int main_ptt()
     size_t nomberTours (0);
     short Couleur (36);
     size_t nbrMap (1);
-    string wayMap ("../../map" + to_string(nbrMap) + ".txt") ;
+    string wayMap ("../../map" + to_string(nbrMap)) ;
     char resultat;
     unsigned maxTurn (200);
 
@@ -26,7 +27,7 @@ int main_ptt()
 
     for(size_t y (nbrMap) ; y < 10 ; ++y)
     {
-        wayMap = ("../../map" + to_string(y) + ".txt") ;
+        wayMap = ("ptt_maps/map" + to_string(y)) ;
         clearScreen_ptt();
         loadMapFromFile_ptt(Mat, wayMap);
         posPlayer.first = 5;

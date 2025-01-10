@@ -8,6 +8,7 @@
 #include "terminalManagement.h"
 #include "entityController.h"
 #include "settingsManagement.h"
+#include "ptt_main.h"
 
 using namespace std;
 
@@ -71,7 +72,7 @@ int main() {
     initSettings(config);
     set_input_mode();
     // Lore logs
-    for(unsigned short select = 0;select < 3;) {
+    for(unsigned short select = 0;select < 4;) {
         select = mainMenu(config);
         switch(select) {
         case 0:
@@ -82,6 +83,9 @@ int main() {
             break;
         case 2:
             settingsMenu(config);
+            break;
+        case 3:
+            main_ptt();
             break;
         }
     }

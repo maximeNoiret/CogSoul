@@ -79,6 +79,9 @@ void renderMainMenu(const short& select) {
     centerOut("Settings");
     cout << '\n';
     color((select == 3 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Paint the Town");
+    cout << '\n';
+    color((select == 4 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
