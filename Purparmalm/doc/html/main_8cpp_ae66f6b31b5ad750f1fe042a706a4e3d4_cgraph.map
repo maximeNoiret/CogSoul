@@ -1,0 +1,59 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,370,55,397"/>
+<area shape="rect" id="Node000002" href="$terminalManagement_8cpp.html#a9d7e8af417b6d543da691e9c0e2f6f9f" title=" " alt="" coords="452,154,543,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="38,369,68,328,115,273,177,218,212,194,249,175,297,160,346,154,394,153,437,156,437,161,394,158,347,159,298,165,251,180,214,198,180,222,119,277,72,331,42,372"/>
+<area shape="rect" id="Node000003" href="$settingsManagement_8cpp.html#a7d5a5e38875dc17e7da237cd66935793" title="loads settings from a config file if it exists, creates one with default values if not" alt="" coords="109,497,196,524"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="42,396,68,434,105,477,116,486,113,490,101,480,63,437,37,399"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html#a873de2e4a04d5419b0ab63b436e72f9d" title=" " alt="" coords="110,332,194,358"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="54,374,95,361,96,366,56,379"/>
+<area shape="rect" id="Node000018" href="$terminalManagement_8cpp.html#af08a846d6127fefbf7354ffee7d31845" title=" " alt="" coords="262,484,375,510"/>
+<area shape="poly" id="edge27_Node000001_Node000018" title=" " alt="" coords="56,391,269,475,267,480,54,396"/>
+<area shape="rect" id="Node000020" href="$terminalManagement_8cpp.html#ab2f4d6f455e879a1633e949e9c1b3126" title="displays an interactive Main Menu with options to play or go into settings" alt="" coords="112,548,193,574"/>
+<area shape="poly" id="edge25_Node000001_Node000020" title=" " alt="" coords="37,397,59,461,79,499,105,534,107,536,103,540,101,538,74,502,54,463,32,399"/>
+<area shape="rect" id="Node000022" href="$settingsManagement_8cpp.html#aca775d316b32578254fbaa104ea87da3" title="displays an interactive menu to modify the settings of the game" alt="" coords="103,78,202,105"/>
+<area shape="poly" id="edge28_Node000001_Node000022" title=" " alt="" coords="29,370,33,325,44,261,65,189,81,154,101,122,109,113,113,117,105,125,85,157,70,191,49,262,38,326,34,370"/>
+<area shape="rect" id="Node000004" href="$settingsManagement_8cpp.html#aa46730cd68532ff709f9c0c87406a8fd" title=" " alt="" coords="297,534,340,561"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="196,517,283,537,281,542,195,523"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="158,330,191,274,217,243,249,216,295,194,344,179,393,170,436,166,437,171,394,175,345,184,297,199,251,221,220,246,195,277,162,333"/>
+<area shape="rect" id="Node000006" href="$terminalManagement_8cpp.html#a3e3316daa41ea69b35c79345ab5c3e75" title="generateRender" alt="" coords="262,28,375,54"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="152,331,157,282,172,211,185,172,201,134,222,97,248,65,251,62,255,65,252,68,226,100,206,136,190,174,177,212,163,283,157,332"/>
+<area shape="rect" id="Node000009" href="$terminalManagement_8cpp.html#a8c800d3aa35b7bb94fc4891fb01bb072" title="Lets the user input their name in an interactive way." alt="" coords="276,230,361,257"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="167,329,202,298,249,267,261,260,264,265,251,271,206,303,170,333"/>
+<area shape="rect" id="Node000010" href="$entityController_8cpp.html#a89c3e00601ae0069b53fbee14091cc0b" title=" " alt="" coords="270,281,368,308"/>
+<area shape="poly" id="edge11_Node000005_Node000010" title=" " alt="" coords="194,330,258,310,259,315,196,335"/>
+<area shape="rect" id="Node000012" href="$mapManagement_8cpp.html#a924337a3c100e48be3165b39c1a71437" title=" " alt="" coords="762,401,863,428"/>
+<area shape="poly" id="edge14_Node000005_Node000012" title=" " alt="" coords="167,357,202,390,225,406,251,419,317,437,385,448,454,453,522,453,648,442,746,426,747,432,648,448,522,458,454,458,384,453,316,442,249,424,223,411,199,394,163,360"/>
+<area shape="rect" id="Node000014" href="$entityController_8cpp.html#af8aa6b1dbba22c7746e31d93ac0cec34" title=" " alt="" coords="266,382,371,409"/>
+<area shape="poly" id="edge17_Node000005_Node000014" title=" " alt="" coords="196,355,259,375,258,380,194,360"/>
+<area shape="rect" id="Node000015" href="$entityController_8cpp.html#af14c5edbd929a91df33934475c7f4d45" title="moveToken" alt="" coords="453,357,542,384"/>
+<area shape="poly" id="edge22_Node000005_Node000015" title=" " alt="" coords="195,346,438,363,438,369,195,351"/>
+<area shape="poly" id="edge23_Node000005_Node000018" title=" " alt="" coords="164,358,199,408,224,437,252,463,269,474,266,479,248,467,220,441,195,411,160,361"/>
+<area shape="rect" id="Node000007" href="$terminalManagement_8cpp.html#abaa07ed1dafa2db88be1be7abb412b58" title=" " alt="" coords="473,41,522,68"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="376,43,458,49,457,54,376,48"/>
+<area shape="rect" id="Node000008" href="$mapManagement_8cpp.html#a3351b244ec420e79e448f4b4089929a5" title="Places a room in the map at coordinates x y." alt="" coords="928,293,1016,320"/>
+<area shape="poly" id="edge8_Node000006_Node000008" title=" " alt="" coords="375,25,416,19,463,15,512,17,560,27,623,50,684,80,741,114,795,151,886,224,948,280,945,284,883,228,792,155,738,119,681,84,621,55,559,32,512,22,463,21,417,24,376,30"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="351,227,449,185,451,190,353,232"/>
+<area shape="poly" id="edge13_Node000010_Node000008" title=" " alt="" coords="368,293,913,303,913,308,368,298"/>
+<area shape="rect" id="Node000011" href="$entityController_8cpp.html#a3706b693dd4a9453f2c3072f08b0fb6c" title="ROUGHLY checks if a wall is present between two positions." alt="" coords="444,242,551,269"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="368,281,429,268,430,273,369,286"/>
+<area shape="poly" id="edge16_Node000012_Node000008" title=" " alt="" coords="842,398,862,387,942,328,945,332,865,391,845,403"/>
+<area shape="rect" id="Node000013" href="$mapManagement_8cpp.html#a3af5d0dcd6e901ba5be2b49a4208e947" title=" " alt="" coords="911,401,1033,428"/>
+<area shape="poly" id="edge15_Node000012_Node000013" title=" " alt="" coords="864,412,896,412,896,417,864,417"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="371,386,437,376,438,381,372,391"/>
+<area shape="rect" id="Node000016" href="$mapManagement_8cpp.html#ad305c1c8a3e6f1d8e0ed826b5506dfb8" title="generates a random room for a desired direction at a specific location" alt="" coords="608,357,714,384"/>
+<area shape="poly" id="edge19_Node000015_Node000016" title=" " alt="" coords="542,368,592,368,592,373,542,373"/>
+<area shape="poly" id="edge21_Node000016_Node000012" title=" " alt="" coords="710,382,750,394,748,399,709,387"/>
+<area shape="rect" id="Node000017" href="$mapManagement_8cpp.html#afa9abef837986d19a8f23c12b2352c0c" title=" " alt="" coords="778,350,847,377"/>
+<area shape="poly" id="edge20_Node000016_Node000017" title=" " alt="" coords="714,365,763,363,763,369,714,371"/>
+<area shape="rect" id="Node000019" href="$terminalManagement_8cpp.html#a2bdd2fceae9e2fbf293a168dc24a71d6" title=" " alt="" coords="435,484,560,510"/>
+<area shape="poly" id="edge24_Node000018_Node000019" title=" " alt="" coords="376,494,420,494,420,500,376,500"/>
+<area shape="rect" id="Node000021" href="$terminalManagement_8h.html#a4cbfc4f85a6a86780c27d62b2a74e69c" title=" " alt="" coords="260,585,377,612"/>
+<area shape="poly" id="edge26_Node000020_Node000021" title=" " alt="" coords="194,568,245,579,244,585,193,573"/>
+<area shape="poly" id="edge29_Node000022_Node000007" title=" " alt="" coords="163,76,199,43,223,26,249,13,277,6,306,3,363,7,416,20,459,35,458,40,414,25,362,13,306,9,278,11,251,18,225,31,202,47,167,80"/>
+<area shape="rect" id="Node000023" href="$settingsManagement_8cpp.html#a2759b42d928434db34a286b555d6f3c4" title=" " alt="" coords="250,78,387,105"/>
+<area shape="poly" id="edge30_Node000022_Node000023" title=" " alt="" coords="202,89,235,89,235,94,202,94"/>
+<area shape="poly" id="edge32_Node000023_Node000002" title=" " alt="" coords="353,103,451,145,449,150,351,108"/>
+<area shape="poly" id="edge33_Node000023_Node000007" title=" " alt="" coords="385,75,457,60,458,65,386,80"/>
+<area shape="rect" id="Node000024" href="$terminalManagement_8cpp.html#a0f393e48f0b30f2d54a4844ede65c4f7" title=" " alt="" coords="458,92,537,118"/>
+<area shape="poly" id="edge31_Node000023_Node000024" title=" " alt="" coords="388,94,443,98,443,104,387,100"/>
+</map>

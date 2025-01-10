@@ -1,0 +1,5 @@
+KColorEnemy   : Red
+KColorPlayer1 : Cyan
+KEmpty        : _
+KTokenEnemy   : O
+KTokenPlayer1 : @
