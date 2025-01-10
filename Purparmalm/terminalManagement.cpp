@@ -93,7 +93,7 @@ unsigned short mainMenu(const settings& config) {
         renderMainMenu(select);
         read(STDIN_FILENO, &input, 1);
         if (input == config.KMoveUp && select > 0) --select;
-        if (input == config.KMoveDown && select < 3) ++select;
+        if (input == config.KMoveDown && select < 4) ++select;
     }
     return select;
 }
