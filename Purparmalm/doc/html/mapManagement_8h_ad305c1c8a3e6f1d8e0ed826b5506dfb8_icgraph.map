@@ -1,0 +1,12 @@
+<map id="generateRoom" name="generateRoom">
+<area shape="rect" id="Node000001" title="generates a random room for a desired direction at a specific location" alt="" coords="524,5,630,32"/>
+<area shape="rect" id="Node000002" href="$entityController_8cpp.html#af14c5edbd929a91df33934475c7f4d45" title="moveToken" alt="" coords="387,5,476,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="508,21,476,21,476,16,508,16"/>
+<area shape="rect" id="Node000003" href="$main_8cpp.html#a873de2e4a04d5419b0ab63b436e72f9d" title=" " alt="" coords="103,5,187,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,21,187,21,187,16,372,16"/>
+<area shape="rect" id="Node000005" href="$entityController_8cpp.html#af8aa6b1dbba22c7746e31d93ac0cec34" title=" " alt="" coords="235,31,339,57"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="372,32,340,37,340,32,371,26"/>
+<area shape="rect" id="Node000004" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,55,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,21,55,21,55,16,87,16"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="219,35,187,29,188,24,220,29"/>
+</map>

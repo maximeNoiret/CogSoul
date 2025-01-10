@@ -1,0 +1,9 @@
+<map id="renderSettingsMenu" name="renderSettingsMenu">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,143,83"/>
+<area shape="rect" id="Node000002" href="$terminalManagement_8cpp.html#a0f393e48f0b30f2d54a4844ede65c4f7" title=" " alt="" coords="197,5,275,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,53,181,33,183,38,120,58"/>
+<area shape="rect" id="Node000003" href="$terminalManagement_8cpp.html#a9d7e8af417b6d543da691e9c0e2f6f9f" title=" " alt="" coords="191,56,281,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,67,175,67,175,72,143,72"/>
+<area shape="rect" id="Node000004" href="$terminalManagement_8cpp.html#abaa07ed1dafa2db88be1be7abb412b58" title=" " alt="" coords="211,107,260,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="120,81,198,105,196,111,118,86"/>
+</map>

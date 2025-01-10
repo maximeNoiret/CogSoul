@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 # Apperance
+=======
+>>>>>>> bdd8ef6a4ce91b4557662dcf7fbb1a399295e79f
 KColorEnemy   : Red
 KColorPlayer1 : Cyan
 KEmpty        : _
 KTokenEnemy   : O
 KTokenPlayer1 : @
 KOutBox       : 3
+<<<<<<< HEAD
 # Gameplay
 KSkipIntro    : 0
 KSeed         : 
@@ -14,3 +18,7 @@ KMoveRight    : d
 KMoveDown     : s
 KMoveLeft     : q
 KInspect      : e
+=======
+KSkipIntro    : 1
+KSeed         : 
+>>>>>>> bdd8ef6a4ce91b4557662dcf7fbb1a399295e79f
