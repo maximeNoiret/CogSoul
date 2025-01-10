@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #include <iostream>
 #include <unistd.h>
 #include "mapManagement.h"

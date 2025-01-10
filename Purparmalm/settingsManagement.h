@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef SETTINGSMANAGEMENT_H
 #define SETTINGSMANAGEMENT_H
 

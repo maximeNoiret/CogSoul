@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #include "settingsManagement.h"
 #include "types.h"
 #include "terminalManagement.h"

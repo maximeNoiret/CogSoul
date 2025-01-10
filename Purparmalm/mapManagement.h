@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef MAPMANAGEMENT_H
 #define MAPMANAGEMENT_H
 

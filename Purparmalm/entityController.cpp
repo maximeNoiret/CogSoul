@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #include "types.h"
 #include "entityController.h"
 #include "mapManagement.h"

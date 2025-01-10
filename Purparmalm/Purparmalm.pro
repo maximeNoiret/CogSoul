@@ -9,11 +9,14 @@ SOURCES += \
         mapManagement.cpp \
         settingsManagement.cpp \
         terminalManagement.cpp \
-        types.cpp
+        types.cpp \
+        ptt_functions.cpp \
+        ptt_main.cpp
 
 HEADERS += \
     entityController.h \
     mapManagement.h \
     settingsManagement.h \
     terminalManagement.h \
-    types.h
+    types.h \
+    ptt_functions.h

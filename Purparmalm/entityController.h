@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef ENTITYCONTROLLER_H
 #define ENTITYCONTROLLER_H
 

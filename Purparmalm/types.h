@@ -1,3 +1,8 @@
+
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef TYPES_H
 #define TYPES_H
 

@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef TERMINALMANAGEMENT_H
 #define TERMINALMANAGEMENT_H
 
