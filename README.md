@@ -13,7 +13,7 @@ You can download the pre-compiled binaries from the release section of this repo
 4. ``$ ./CogSoul`` to start the game. It should generate a default config file next to itself.
 
 ### Building
-I mean, you can just do like ``g++ -o CogSoul path/to/repo/*.cpp`` and it'll create an executable called Game.
+I mean, you can just do like ``$ g++ -o CogSoul path/to/repo/*.cpp`` and it'll create an executable called CogSoul.
 Or you could load the .pro file into QTCreator and build it with that.
 I dunno how all this Makefile stuff works tbh and cba to figure it out lmao just use g++
 
