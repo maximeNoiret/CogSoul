@@ -1,16 +1,9 @@
-.idea
-Purparmalm/build/Desktop-Debug/.qtc_clangd/
-Purparmalm/build/Desktop-Debug/.qtc_clangd
-Purparmalm/build/Desktop-Debug/.qtc_clangd/*
-Purparmalm/Purpacman.pro.user
-Purparmalm/build/Desktop-Debug/Makefile Purparmalm/build/Desktop-Debug/main.o
-Purparmalm/Purparmalm.pro.user
-Purparmalm/build/Desktop-Release/.qmake.stash
-Purparmalm/build/Desktop-Release/.qtc_clangd
-Purparmalm/build/Desktop-Release/Makefile
-Purparmalm/build/Desktop-Release/entityController.o
-Purparmalm/build/Desktop-Release/types.o
-Purparmalm/build/Desktop-Release/terminalManagement.o
-Purparmalm/build/Desktop-Release/mapManagement.o
-Purparmalm/build/Desktop-Release/settingsManagement.o
-Purparmalm/build/Desktop-Release/main.o
+build/Desktop-Release/.qmake.stash
+build/Desktop-Release/.qtc_clangd
+build/Desktop-Release/Makefile
+build/Desktop-Release/entityController.o
+build/Desktop-Release/types.o
+build/Desktop-Release/terminalManagement.o
+build/Desktop-Release/mapManagement.o
+build/Desktop-Release/settingsManagement.o
+build/Desktop-Release/main.o
