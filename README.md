@@ -14,4 +14,9 @@ I dunno how all this Makefile stuff works tbh and cba to figure it out lmao just
 
 ---
 
+## Contributing
+If you don't mind needing to bleach your eyes after reading my code and, somehow, actually want to contribute, you can generate a documentation of the code using doxygen.
+There is a Doxyfile already present at the root of the repo, so just use ``doxygen`` to generate the doc. It'll generate it in the 'doc' folder by default.
+(Though you probably know all that if you wanna contribute lmao)
+
 PS: if someone could make a pull request to implement A* for the enemies, I'd greatly appreciate it cuz I'm way too bad at math to figure it out.
