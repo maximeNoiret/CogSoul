@@ -1,9 +1,1 @@
-build/Desktop-Release/.qmake.stash
-build/Desktop-Release/.qtc_clangd
-build/Desktop-Release/Makefile
-build/Desktop-Release/entityController.o
-build/Desktop-Release/types.o
-build/Desktop-Release/terminalManagement.o
-build/Desktop-Release/mapManagement.o
-build/Desktop-Release/settingsManagement.o
-build/Desktop-Release/main.o
+build
