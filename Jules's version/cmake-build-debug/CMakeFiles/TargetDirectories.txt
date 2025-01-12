@@ -1,3 +1,0 @@
-/home/fuselier/Documents/GitHub/PacmanGame/cmake-build-debug/CMakeFiles/PacmanGame.dir
-/home/fuselier/Documents/GitHub/PacmanGame/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/fuselier/Documents/GitHub/PacmanGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
