@@ -19,4 +19,5 @@ HEADERS += \
     settingsManagement.h \
     terminalManagement.h \
     types.h \
-    ptt_functions.h
+    ptt_functions.h \
+    ptt_main.h

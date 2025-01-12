@@ -1,8 +1,8 @@
-
 /**
  * @author Brest-Lestrade Hugo
- *
  */
+
+// ToDo: fix all the documentation
 
 #ifndef PTT_FUNCTIONS_H
 #define PTT_FUNCTIONS_H

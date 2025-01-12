@@ -1,5 +1,16 @@
+# Apperance
 KColorEnemy   : Red
 KColorPlayer1 : Cyan
 KEmpty        : _
 KTokenEnemy   : O
 KTokenPlayer1 : @
+KOutBox       : 3
+# Gameplay
+KSkipIntro    : 0
+KSeed         : 
+# Controls
+KMoveUp       : z
+KMoveRight    : d
+KMoveDown     : s
+KMoveLeft     : q
+KInspect      : e

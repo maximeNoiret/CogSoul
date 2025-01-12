@@ -1,3 +1,7 @@
+/**
+ * @author Noiret Maxime
+ */
+
 #ifndef PTT_MAIN_H
 #define PTT_MAIN_H
 
