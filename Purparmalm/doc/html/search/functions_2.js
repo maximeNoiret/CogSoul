@@ -1,8 +1,0 @@
-var searchData=
-[
-  ['initsettings_0',['initSettings',['../settingsManagement_8cpp.html#a7d5a5e38875dc17e7da237cd66935793',1,'initSettings(settings &amp;config):&#160;settingsManagement.cpp'],['../settingsManagement_8h.html#a7d5a5e38875dc17e7da237cd66935793',1,'initSettings(settings &amp;config):&#160;settingsManagement.cpp']]],
-  ['inputname_1',['inputName',['../terminalManagement_8cpp.html#a8c800d3aa35b7bb94fc4891fb01bb072',1,'inputName():&#160;terminalManagement.cpp'],['../terminalManagement_8h.html#a0e886f62987b24ba6a1067951d877f5a',1,'inputName():&#160;terminalManagement.cpp']]],
-  ['isinvect_2',['isInVect',['../mapManagement_8cpp.html#afa9abef837986d19a8f23c12b2352c0c',1,'mapManagement.cpp']]],
-  ['isplayerseen_3',['isPlayerSeen',['../entityController_8cpp.html#a89c3e00601ae0069b53fbee14091cc0b',1,'isPlayerSeen(const mapGrid &amp;Mat, vector&lt; enemyInfo &gt; &amp;enemies, const playerInfo &amp;player, const settings &amp;config):&#160;entityController.cpp'],['../entityController_8h.html#a5ac3f0b79078d72e694111b19a44d54c',1,'isPlayerSeen(const mapGrid &amp;Mat, std::vector&lt; enemyInfo &gt; &amp;enemies, const playerInfo &amp;player, const settings &amp;config):&#160;entityController.h']]],
-  ['iswallbetween_4',['isWallBetween',['../entityController_8cpp.html#a3706b693dd4a9453f2c3072f08b0fb6c',1,'isWallBetween(const mapGrid &amp;Mat, const CPosition &amp;pos1, const CPosition &amp;pos2):&#160;entityController.cpp'],['../entityController_8h.html#a3706b693dd4a9453f2c3072f08b0fb6c',1,'isWallBetween(const mapGrid &amp;Mat, const CPosition &amp;pos1, const CPosition &amp;pos2):&#160;entityController.cpp']]]
-];

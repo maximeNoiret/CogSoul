@@ -1,7 +1,0 @@
-<map id="generateRender" name="generateRender">
-<area shape="rect" id="Node000001" title="generateRender" alt="" coords="5,31,119,57"/>
-<area shape="rect" id="Node000002" href="$terminalManagement_8cpp.html#abaa07ed1dafa2db88be1be7abb412b58" title=" " alt="" coords="186,5,235,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,32,169,23,170,28,120,37"/>
-<area shape="rect" id="Node000003" href="$mapManagement_8cpp.html#a3351b244ec420e79e448f4b4089929a5" title="Places a room in the map at coordinates x y." alt="" coords="167,56,254,83"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,51,152,57,151,62,119,56"/>
-</map>
