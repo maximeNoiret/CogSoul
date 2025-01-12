@@ -10,7 +10,7 @@ You can download the pre-compiled binaries from the release section of this repo
 1. Download the executable from the releases page
 2. Download the 'rooms' and 'ptt_maps' folders from the repo and place them next to the executable
 3. ``# chmod +x CogSoul`` to make is executable
-4. ``./CogSoul`` to start the game. It should generate a default config file next to itself.
+4. ``$ ./CogSoul`` to start the game. It should generate a default config file next to itself.
 
 ### Building
 I mean, you can just do like ``g++ -o CogSoul path/to/repo/*.cpp`` and it'll create an executable called Game.
