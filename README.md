@@ -12,5 +12,6 @@ I mean, you can just do like ``g++ -o CogSoul path/to/repo/*.cpp`` and it'll cre
 Or you could load the .pro file into QTCreator and build it with that.
 I dunno how all this Makefile stuff works tbh and cba to figure it out lmao just use g++
 
+---
 
 PS: if someone could make a pull request to implement A* for the enemies, I'd greatly appreciate it cuz I'm way too bad at math to figure it out.
