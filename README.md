@@ -6,7 +6,7 @@ Will not get ported to Windows.
 
 ## How to install
 ### Binaries
-You can download the pre-compiled binaries from the release section of this repo, tho it might not be up to date with the source so I recommend building it yourself. (you use linux, you should be used to compiling stuff)
+You can download the latest pre-compiled binaries from the [release section](https://github.com/maxnrt/CogSoul/releases/latest) of this repo, tho it might not be up to date with the source so I recommend building it yourself. (you use linux, you should be used to compiling stuff)
 1. Download the executable from the releases page
 2. Download the 'rooms' and 'ptt_maps' folders from the repo and place them next to the executable
 3. ``# chmod +x CogSoul`` to make is executable
