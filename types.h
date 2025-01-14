@@ -82,7 +82,7 @@ const std::array<std::string, 0> roomsDown = {};
 const std::array<std::string, 2> roomsLeft = {"anotherRoom.txt", "roomTest.txt"};
 
 // Yes, I inspired myself with AI to write these, but as they aren't important to the code or gam|eplay, it's fine
-const std::array<std::string, 10> idleInspects = {"A cough can be heard in the distance.",
+const std::array<std::string, 11> idleInspects = {"A cough can be heard in the distance.",
                                                   "You hear the locking of a door faraway.",
                                                   "Someone is called through the intercom.",
                                                   "You inspect your own code. 3k errors found.\\  You wonder how you're even running.",
@@ -91,7 +91,8 @@ const std::array<std::string, 10> idleInspects = {"A cough can be heard in the d
                                                   "A clang can be heard through ventilation.",
                                                   "Air filters struggle against years of dust.",
                                                   "You detect the distant sound of dripping water.",
-                                                  "A faint breeze stirs loose papers on a desk."};
+                                                  "A faint breeze stirs loose papers on a desk.",
+                                                  "You run fastfetch on your console.\\  maxnrt@archmech\\  ---------------\\  OS: Arch Linux x86_64\\  Host: 20JNS49900 (ThinkPad T9112)\\  \\You realize your hardware is a Thinkpad."};
 
 
 #endif // TYPES_H

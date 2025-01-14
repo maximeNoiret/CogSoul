@@ -8,14 +8,13 @@
 #include "terminalManagement.h"
 #include "entityController.h"
 #include "settingsManagement.h"
-#include "ptt_main.h"
 
 using namespace std;
 
 // PLEASE TELL ME, IS THERE A WAY TO HAVE ACCESS TO config WITHOUT PUTTING IT EVERY FUCKING WHERE?????
 // without just doing a global variable cuz I heard those suck lmao
 
-int mainGame(const settings& config)
+int mainGame(settings& config)
 {
     srand((config.KSeed.size() == 0 || !isdigit(config.KSeed[0]) ? time(NULL) : stoul(config.KSeed)));  // ToDo: add better seed system
     mapGrid gameMap (50, mapLine (80, config.KEmpty));
@@ -49,13 +48,23 @@ int mainGame(const settings& config)
     }
 
     // main gameLoop
-    for (char input = 0; !player.dead && !playerWon && input != 27;) {
+    pair<unsigned, unsigned> terminal_size;
+    for (char input = 0; !player.dead && !playerWon;) {
         clearScreen();
-        generateRender(gameMap, 10, player, config, enemies);
-        read(STDIN_FILENO, &input, 1);
-        moveToken(gameMap, input, player.pos, config, enemies);
-        moveEnemies(gameMap, player, enemies, config);
-        player.seen = isPlayerSeen(gameMap, enemies, player, config);
+        terminal_size = get_terminal_size();
+        if (terminal_size.first < 24 || terminal_size.second < 80) {
+            renderIncorrectSize();
+            milSleep(100);
+        } else {
+            generateRender(gameMap, 10, player, config, enemies);
+            read(STDIN_FILENO, &input, 1);
+            if (input == 27) {
+                pauseMenu(config);
+            }
+            moveToken(gameMap, input, player.pos, config, enemies);
+            moveEnemies(gameMap, player, enemies, config);
+            player.seen = isPlayerSeen(gameMap, enemies, player, config);
+        }
     }
 
     if (player.dead) {
@@ -72,7 +81,7 @@ int main() {
     initSettings(config);
     set_input_mode();
     // Lore logs
-    for(unsigned short select = 0;select < 4;) {
+    for(unsigned short select = 0;select < 3;) {
         select = mainMenu(config);
         switch(select) {
         case 0:
@@ -83,9 +92,6 @@ int main() {
             break;
         case 2:
             settingsMenu(config);
-            break;
-        case 3:
-            main_ptt();
             break;
         }
     }

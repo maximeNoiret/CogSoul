@@ -8,6 +8,12 @@
 #include "types.h"
 
 
+/**
+ * @brief get_terminal_size
+ * @return Pair containing the number of rows and columns of the terminal running the game.
+ */
+std::pair<unsigned, unsigned> get_terminal_size();
+
 void reset_input_mode();
 void set_input_mode();
 
@@ -20,6 +26,8 @@ void color (const unsigned & col);
 
 void centerOut(const std::string& out);
 
+void renderIncorrectSize();
+
 void renderMainMenu();
 
 
@@ -31,6 +39,8 @@ unsigned short mainMenu(const settings& config);
 
 
 void helpMenu(const settings& config);
+
+void pauseMenu(settings& config);
 
 /**
  * @brief Lets the user input their name in an interactive way

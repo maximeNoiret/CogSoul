@@ -6,14 +6,22 @@
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/ioctl.h>
 #include <iomanip>
 #include <thread>
 #include <chrono>
 #include "types.h"
 #include "mapManagement.h"
+#include "settingsManagement.h"
 
 using namespace std;
 struct termios saved_attributes;
+
+pair<unsigned, unsigned> get_terminal_size() {
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    return {w.ws_row,w.ws_col};
+}
 
 void reset_input_mode() {
     tcsetattr (STDIN_FILENO, TCSANOW, &saved_attributes);
@@ -58,16 +66,21 @@ void color (const unsigned & col) {
 }
 
 
-// NOTE: this function assumes a terminal width of 80 columns, the default pretty much everywhere (even windows)
 void centerOut(const string& out) {
-    cout << string(80*0.5 - out.size()*0.5, ' ') << out << endl;
+    cout << string(get_terminal_size().second*0.5 - out.size()*0.5, ' ') << out << endl;
 }
 
+void renderIncorrectSize() {
+    cout << string(get_terminal_size().first * 0.5 - 1, '\n');
+    centerOut("Incorrect Terminal Size!");
+    centerOut("Minimum is 24 rows and 80 cols");
+}
 
-void renderMainMenu(const short& select) {
+void renderMainMenu(const unsigned short& select) {
     clearScreen();
     cout << string(4, '\n');
-    centerOut("GAME NAME");
+    centerOut("CogSoul");
+    centerOut("(subject to change)");
     cout << string(3, '\n');
     color((select == 0 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Play");
@@ -79,9 +92,6 @@ void renderMainMenu(const short& select) {
     centerOut("Settings");
     cout << '\n';
     color((select == 3 ? Colors.find("Green")->second : Colors.find("Reset")->second));
-    centerOut("Paint the Town");
-    cout << '\n';
-    color((select == 4 ? Colors.find("Green")->second : Colors.find("Reset")->second));
     centerOut("Exit");
     color(Colors.find("Reset")->second);
 }
@@ -93,7 +103,7 @@ unsigned short mainMenu(const settings& config) {
         renderMainMenu(select);
         read(STDIN_FILENO, &input, 1);
         if (input == config.KMoveUp && select > 0) --select;
-        if (input == config.KMoveDown && select < 4) ++select;
+        if (input == config.KMoveDown && select < 3) ++select;
     }
     return select;
 }
@@ -121,6 +131,53 @@ void helpMenu(const settings& config) {
     read(STDIN_FILENO, &input, 1);
     color(Colors.find("Reset")->second);
     return;
+}
+
+
+void renderPauseMenu(const unsigned short& select, settings& config) {
+    clearScreen();
+    cout << string(4, '\n');
+    centerOut("PAUSED");
+    cout << string(3, '\n');
+    color((select == 0 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Resume");
+    cout << '\n';
+    color((select == 1 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Help");
+    cout << '\n';
+    color((select == 2 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Settings");
+    cout << '\n';
+    color((select == 3 ? Colors.find("Green")->second : Colors.find("Reset")->second));
+    centerOut("Exit to Desktop");
+    color(Colors.find("Reset")->second);
+}
+
+
+void pauseMenu(settings& config) {
+    unsigned short select = 0;
+    do {
+        for(char input = 0;input != 10;) {
+            renderPauseMenu(select, config);
+            read(STDIN_FILENO, &input, 1);
+            if (input == config.KMoveUp && select > 0) --select;
+            if (input == config.KMoveDown && select < 3) ++select;
+        };
+        switch(select) {
+        case 0:
+            break;
+        case 1:
+            helpMenu(config);
+            break;
+        case 2:
+            settingsMenu(config);
+            break;
+        case 3:
+            clearScreen();
+            cout << "Quitting the game..." << endl;
+            exit(0);
+        }
+    } while (select > 0);
 }
 
 
