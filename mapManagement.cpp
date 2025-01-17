@@ -87,7 +87,7 @@ template<typename T>
 bool isInVect(const vector<T>& vect, const T elem) {
     typename vector<T>::const_iterator iter = vect.begin();
     for (;iter < vect.end() && *iter != elem;++iter);
-    return !(iter == vect.end());
+    return iter != vect.end();
 }
 
 
