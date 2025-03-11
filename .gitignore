@@ -1,3 +1,5 @@
 build
 CogSoul.pro.user
 config.yaml
+.qmake.stash
+Makefile
