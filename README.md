@@ -13,9 +13,16 @@ You can download the latest pre-compiled binaries from the [release section](htt
 4. ``$ ./CogSoul`` to start the game. It should generate a default config file next to itself.
 
 ### Building
-I mean, you can just do like ``$ g++ -o CogSoul path/to/repo/*.cpp`` and it'll create an executable called CogSoul.
+Using qmake:
+```bash
+$ git clone https://github.com/maxnrt/CogSoul    # Get source code repo
+$ cd CogSoul                                     # Go into repo
+$ qmake                                          # prepare to build with qmake or something I don't actually know lol
+$ make                                           # actually compile
+```
+You can also build it using g++ simply by doing ``$ g++ -o CogSoul path/to/repo/*.cpp``\
 Or you could load the .pro file into QTCreator and build it with that.
-I dunno how all this Makefile stuff works tbh and cba to figure it out lmao just use g++
+I dunno how all this Makefile stuff works tbh and cba to figure it out lmao
 
 ---
 
